@@ -6,6 +6,8 @@ target 'NoteApp' do
   use_frameworks!
 
   # Pods for NoteApp
-    pod 'RxSwift', '6.5.0'
-    pod 'RxCocoa', '6.5.0'
+  pod 'Then'
+  pod 'IQKeyboardManagerSwift'
+  pod "ESPullToRefresh"
+  pod 'Toast-Swift', '~> 5.0.1'
 end
