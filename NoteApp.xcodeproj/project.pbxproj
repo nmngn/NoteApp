@@ -8,6 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		218133CE0BAB129F8591D057 /* Pods_NoteApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82CAA844755A9849F41104EC /* Pods_NoteApp.framework */; };
+		D80FA51529239BB000D0B9ED /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80FA51429239BB000D0B9ED /* HomeModel.swift */; };
+		D80FA5192924902B00D0B9ED /* TitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80FA5172924902B00D0B9ED /* TitleTableViewCell.swift */; };
+		D80FA51A2924902B00D0B9ED /* TitleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D80FA5182924902B00D0B9ED /* TitleTableViewCell.xib */; };
+		D80FA521292490F600D0B9ED /* FolderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80FA51F292490F600D0B9ED /* FolderTableViewCell.swift */; };
+		D80FA522292490F600D0B9ED /* FolderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D80FA520292490F600D0B9ED /* FolderTableViewCell.xib */; };
+		D80FA5252924910500D0B9ED /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80FA5232924910500D0B9ED /* SearchTableViewCell.swift */; };
+		D80FA5262924910500D0B9ED /* SearchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D80FA5242924910500D0B9ED /* SearchTableViewCell.xib */; };
 		D8C336B92921E8460008527A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C336B82921E8460008527A /* AppDelegate.swift */; };
 		D8C336BB2921E8460008527A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C336BA2921E8460008527A /* SceneDelegate.swift */; };
 		D8C336BD2921E8460008527A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C336BC2921E8460008527A /* ViewController.swift */; };
@@ -25,6 +32,13 @@
 		052467612AB716AA8E99F55F /* Pods-NoteApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoteApp.release.xcconfig"; path = "Target Support Files/Pods-NoteApp/Pods-NoteApp.release.xcconfig"; sourceTree = "<group>"; };
 		82CAA844755A9849F41104EC /* Pods_NoteApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NoteApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2173153BA163A8E51520CA7 /* Pods-NoteApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoteApp.debug.xcconfig"; path = "Target Support Files/Pods-NoteApp/Pods-NoteApp.debug.xcconfig"; sourceTree = "<group>"; };
+		D80FA51429239BB000D0B9ED /* HomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModel.swift; sourceTree = "<group>"; };
+		D80FA5172924902B00D0B9ED /* TitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleTableViewCell.swift; sourceTree = "<group>"; };
+		D80FA5182924902B00D0B9ED /* TitleTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TitleTableViewCell.xib; sourceTree = "<group>"; };
+		D80FA51F292490F600D0B9ED /* FolderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderTableViewCell.swift; sourceTree = "<group>"; };
+		D80FA520292490F600D0B9ED /* FolderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FolderTableViewCell.xib; sourceTree = "<group>"; };
+		D80FA5232924910500D0B9ED /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
+		D80FA5242924910500D0B9ED /* SearchTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchTableViewCell.xib; sourceTree = "<group>"; };
 		D8C336B52921E8460008527A /* NoteApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NoteApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8C336B82921E8460008527A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D8C336BA2921E8460008527A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -59,6 +73,27 @@
 				052467612AB716AA8E99F55F /* Pods-NoteApp.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		D80FA51329239BA800D0B9ED /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D80FA51429239BB000D0B9ED /* HomeModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		D80FA51629248FBC00D0B9ED /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				D80FA5172924902B00D0B9ED /* TitleTableViewCell.swift */,
+				D80FA5182924902B00D0B9ED /* TitleTableViewCell.xib */,
+				D80FA51F292490F600D0B9ED /* FolderTableViewCell.swift */,
+				D80FA520292490F600D0B9ED /* FolderTableViewCell.xib */,
+				D80FA5232924910500D0B9ED /* SearchTableViewCell.swift */,
+				D80FA5242924910500D0B9ED /* SearchTableViewCell.xib */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		D8C336AC2921E8460008527A = {
@@ -103,7 +138,7 @@
 		D8C336D22921ED4E0008527A /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				D8C336D82921FE630008527A /* View */,
+				D8C336D82921FE630008527A /* Home */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -129,13 +164,15 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		D8C336D82921FE630008527A /* View */ = {
+		D8C336D82921FE630008527A /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				D80FA51629248FBC00D0B9ED /* Cell */,
+				D80FA51329239BA800D0B9ED /* Model */,
 				D8C336BE2921E8460008527A /* Main.storyboard */,
 				D8C336D92921FE7D0008527A /* HomeController.swift */,
 			);
-			path = View;
+			path = Home;
 			sourceTree = "<group>";
 		};
 		F4C65CCA9943866D7D3FD387 /* Frameworks */ = {
@@ -206,8 +243,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D80FA51A2924902B00D0B9ED /* TitleTableViewCell.xib in Resources */,
+				D80FA522292490F600D0B9ED /* FolderTableViewCell.xib in Resources */,
 				D8C336C82921E8470008527A /* LaunchScreen.storyboard in Resources */,
 				D8C336DC2921FFE70008527A /* Color.xcassets in Resources */,
+				D80FA5262924910500D0B9ED /* SearchTableViewCell.xib in Resources */,
 				D8C336C52921E8470008527A /* Assets.xcassets in Resources */,
 				D8C336C02921E8460008527A /* Main.storyboard in Resources */,
 			);
@@ -263,11 +303,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				D8C336BD2921E8460008527A /* ViewController.swift in Sources */,
+				D80FA521292490F600D0B9ED /* FolderTableViewCell.swift in Sources */,
 				D8C336B92921E8460008527A /* AppDelegate.swift in Sources */,
 				D8C336DE292200CE0008527A /* FolderEntity.swift in Sources */,
+				D80FA5252924910500D0B9ED /* SearchTableViewCell.swift in Sources */,
 				D8C336BB2921E8460008527A /* SceneDelegate.swift in Sources */,
+				D80FA51529239BB000D0B9ED /* HomeModel.swift in Sources */,
 				D8C336C32921E8460008527A /* NoteApp.xcdatamodeld in Sources */,
 				D8C336E02922010D0008527A /* CoreDataManager.swift in Sources */,
+				D80FA5192924902B00D0B9ED /* TitleTableViewCell.swift in Sources */,
 				D8C336DA2921FE7D0008527A /* HomeController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
