@@ -15,6 +15,13 @@
 		D80FA522292490F600D0B9ED /* FolderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D80FA520292490F600D0B9ED /* FolderTableViewCell.xib */; };
 		D80FA5252924910500D0B9ED /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80FA5232924910500D0B9ED /* SearchTableViewCell.swift */; };
 		D80FA5262924910500D0B9ED /* SearchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D80FA5242924910500D0B9ED /* SearchTableViewCell.xib */; };
+		D80FA5302924D10400D0B9ED /* UITableView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80FA5292924D10400D0B9ED /* UITableView+.swift */; };
+		D80FA5312924D10400D0B9ED /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80FA52A2924D10400D0B9ED /* UIViewController+.swift */; };
+		D80FA5322924D10400D0B9ED /* Other+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80FA52B2924D10400D0B9ED /* Other+.swift */; };
+		D80FA5332924D10400D0B9ED /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80FA52C2924D10400D0B9ED /* String+.swift */; };
+		D80FA5342924D10400D0B9ED /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80FA52D2924D10400D0B9ED /* UIView+.swift */; };
+		D80FA5352924D10400D0B9ED /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80FA52E2924D10400D0B9ED /* UITextField+.swift */; };
+		D80FA5362924D10400D0B9ED /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80FA52F2924D10400D0B9ED /* Date+.swift */; };
 		D8C336B92921E8460008527A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C336B82921E8460008527A /* AppDelegate.swift */; };
 		D8C336BB2921E8460008527A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C336BA2921E8460008527A /* SceneDelegate.swift */; };
 		D8C336BD2921E8460008527A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C336BC2921E8460008527A /* ViewController.swift */; };
@@ -39,6 +46,13 @@
 		D80FA520292490F600D0B9ED /* FolderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FolderTableViewCell.xib; sourceTree = "<group>"; };
 		D80FA5232924910500D0B9ED /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		D80FA5242924910500D0B9ED /* SearchTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchTableViewCell.xib; sourceTree = "<group>"; };
+		D80FA5292924D10400D0B9ED /* UITableView+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+.swift"; sourceTree = "<group>"; };
+		D80FA52A2924D10400D0B9ED /* UIViewController+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
+		D80FA52B2924D10400D0B9ED /* Other+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Other+.swift"; sourceTree = "<group>"; };
+		D80FA52C2924D10400D0B9ED /* String+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
+		D80FA52D2924D10400D0B9ED /* UIView+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
+		D80FA52E2924D10400D0B9ED /* UITextField+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
+		D80FA52F2924D10400D0B9ED /* Date+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
 		D8C336B52921E8460008527A /* NoteApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NoteApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8C336B82921E8460008527A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D8C336BA2921E8460008527A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -96,6 +110,20 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		D80FA5282924D0EF00D0B9ED /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				D80FA52F2924D10400D0B9ED /* Date+.swift */,
+				D80FA52B2924D10400D0B9ED /* Other+.swift */,
+				D80FA52C2924D10400D0B9ED /* String+.swift */,
+				D80FA5292924D10400D0B9ED /* UITableView+.swift */,
+				D80FA52E2924D10400D0B9ED /* UITextField+.swift */,
+				D80FA52D2924D10400D0B9ED /* UIView+.swift */,
+				D80FA52A2924D10400D0B9ED /* UIViewController+.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		D8C336AC2921E8460008527A = {
 			isa = PBXGroup;
 			children = (
@@ -118,6 +146,7 @@
 			isa = PBXGroup;
 			children = (
 				D8C336CF2921ECB60008527A /* Application */,
+				D80FA5282924D0EF00D0B9ED /* Extension */,
 				D8C336D62921F3FF0008527A /* Model */,
 				D8C336D22921ED4E0008527A /* Presentation */,
 				D8C336D42921ED5C0008527A /* Resources */,
@@ -302,15 +331,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D80FA5322924D10400D0B9ED /* Other+.swift in Sources */,
 				D8C336BD2921E8460008527A /* ViewController.swift in Sources */,
 				D80FA521292490F600D0B9ED /* FolderTableViewCell.swift in Sources */,
 				D8C336B92921E8460008527A /* AppDelegate.swift in Sources */,
 				D8C336DE292200CE0008527A /* FolderEntity.swift in Sources */,
 				D80FA5252924910500D0B9ED /* SearchTableViewCell.swift in Sources */,
+				D80FA5352924D10400D0B9ED /* UITextField+.swift in Sources */,
 				D8C336BB2921E8460008527A /* SceneDelegate.swift in Sources */,
+				D80FA5332924D10400D0B9ED /* String+.swift in Sources */,
+				D80FA5362924D10400D0B9ED /* Date+.swift in Sources */,
 				D80FA51529239BB000D0B9ED /* HomeModel.swift in Sources */,
 				D8C336C32921E8460008527A /* NoteApp.xcdatamodeld in Sources */,
 				D8C336E02922010D0008527A /* CoreDataManager.swift in Sources */,
+				D80FA5312924D10400D0B9ED /* UIViewController+.swift in Sources */,
+				D80FA5342924D10400D0B9ED /* UIView+.swift in Sources */,
+				D80FA5302924D10400D0B9ED /* UITableView+.swift in Sources */,
 				D80FA5192924902B00D0B9ED /* TitleTableViewCell.swift in Sources */,
 				D8C336DA2921FE7D0008527A /* HomeController.swift in Sources */,
 			);
