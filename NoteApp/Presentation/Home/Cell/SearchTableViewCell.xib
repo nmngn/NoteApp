@@ -17,8 +17,9 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <searchBar contentMode="redraw" placeholder="Tìm kiếm" translatesAutoresizingMaskIntoConstraints="NO" id="0H2-sw-MYJ">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                    <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="0H2-sw-MYJ">
+                        <rect key="frame" x="8" y="0.0" width="304" height="44"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <textInputTraits key="textInputTraits"/>
                         <scopeButtonTitles>
                             <string>Title</string>
@@ -32,15 +33,15 @@
                     </searchBar>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="0H2-sw-MYJ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="0hR-E0-8Ja"/>
+                    <constraint firstItem="0H2-sw-MYJ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="0hR-E0-8Ja"/>
                     <constraint firstAttribute="bottom" secondItem="0H2-sw-MYJ" secondAttribute="bottom" id="4f9-Q4-8YB"/>
-                    <constraint firstAttribute="trailing" secondItem="0H2-sw-MYJ" secondAttribute="trailing" id="Uzo-O3-Jf1"/>
+                    <constraint firstAttribute="trailing" secondItem="0H2-sw-MYJ" secondAttribute="trailing" constant="8" id="Uzo-O3-Jf1"/>
                     <constraint firstItem="0H2-sw-MYJ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="fms-Pb-BGn"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-            <point key="canvasLocation" x="133" y="118"/>
+            <point key="canvasLocation" x="131.8840579710145" y="117.85714285714285"/>
         </tableViewCell>
     </objects>
 </document>

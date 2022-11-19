@@ -8,10 +8,6 @@
 import UIKit
 
 extension UIViewController {
-    var appDelegate: SceneDelegate {
-        return UIApplication.shared.connectedScenes.first!.delegate as! SceneDelegate
-    }
-    
     class func instantiateViewControllerFromStoryboard(storyboardName: String) -> Self {
         return instantiateFromStoryboardHelper(storyboardName: storyboardName, storyboardId: self.className)
     }
@@ -21,22 +17,6 @@ extension UIViewController {
         let storyboard = UIStoryboard(name: storyboardName, bundle: nil)
         let controller = storyboard.instantiateViewController(withIdentifier: storyboardId) as! T
         return controller
-    }
-    
-    func loading() {
-        let alert = UIAlertController(title: nil, message: "Vui lòng đợi...", preferredStyle: .alert)
-
-        let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
-        loadingIndicator.hidesWhenStopped = true
-        loadingIndicator.style = .medium
-        loadingIndicator.startAnimating();
-
-        alert.view.addSubview(loadingIndicator)
-        present(alert, animated: true, completion: nil)
-    }
-    
-    func dismissLoading() {
-        self.dismiss(animated: true, completion: nil)
     }
     
     func openAlert(_ message: String) {
@@ -56,7 +36,7 @@ extension UIViewController {
     
     func setupNavigationButton() {
         self.navigationItem.setHidesBackButton(true, animated: true)
-        let backItem = UIBarButtonItem(image:  UIImage(named: "ic_left_arrow")?.toHierachicalImage()
+        let backItem = UIBarButtonItem(image:  UIImage(named: "ic_left_arrow")
                                        , style: .plain, target: self, action: #selector(touchBackButton))
         navigationItem.leftBarButtonItems = [backItem]
     }

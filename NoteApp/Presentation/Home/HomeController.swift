@@ -32,6 +32,7 @@ class HomeController: UIViewController {
             $0.registerNibCellFor(type: TitleTableViewCell.self)
             $0.registerNibCellFor(type: FolderTableViewCell.self)
             $0.registerNibCellFor(type: SearchTableViewCell.self)
+            $0.keyboardDismissMode = .onDrag
         }
     }
     
@@ -39,14 +40,28 @@ class HomeController: UIViewController {
         self.model.removeAll()
         var title = HomeModel(type: .title)
         title.title = "Folders"
+        title.fontStyle = UIFont.boldSystemFont(ofSize: 18)
         
         let search = HomeModel(type: .search)
-        let quickNote = HomeModel(type: .folder)
         
-        let folder = HomeModel(type: .folder)
+        var otherTitle = HomeModel(type: .title)
+        otherTitle.title = "Other"
+        otherTitle.fontStyle = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        
+        var quickFolder = HomeModel(type: .folder)
+        quickFolder.imageFolder = "quick_folder_icon"
+        quickFolder.titleFolder = "Quick Note"
+        quickFolder.countNote = 0
+        
+        var folder = HomeModel(type: .folder)
+        folder.imageFolder = "folder_icon"
+        folder.titleFolder = "Hihi"
+        folder.countNote = 1
+        
         self.model.append(title)
         self.model.append(search)
-        self.model.append(quickNote)
+        self.model.append(quickFolder)
+        self.model.append(otherTitle)
         self.model.append(folder)
         self.tableView.reloadData()
     }
@@ -71,11 +86,13 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "TitleTableViewCell", for: indexPath)
                     as? TitleTableViewCell else { return UITableViewCell() }
             cell.selectionStyle = .none
+            cell.setupData(data: model)
             return cell
         case .folder:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "FolderTableViewCell", for: indexPath)
                     as? FolderTableViewCell else { return UITableViewCell() }
             cell.selectionStyle = .none
+            cell.setupData(data: model)
             return cell
         case .search:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "SearchTableViewCell", for: indexPath)

@@ -12,29 +12,28 @@
         <!--Home Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="HomeController" customModule="NoteApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HomeController" id="BYZ-38-t0r" customClass="HomeController" customModule="NoteApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="3C3-M2-t4G">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="E5V-sp-2kO">
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <sections/>
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" name="NewBG"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="3C3-M2-t4G" secondAttribute="bottom" id="ETJ-0B-tsg"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="3C3-M2-t4G" secondAttribute="trailing" id="TBs-wS-Ibu"/>
-                            <constraint firstItem="3C3-M2-t4G" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="rn2-nW-cVr"/>
-                            <constraint firstItem="3C3-M2-t4G" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="uAo-x3-nrg"/>
+                            <constraint firstItem="E5V-sp-2kO" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="3vS-X6-y38"/>
+                            <constraint firstItem="E5V-sp-2kO" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="N1c-fc-I0O"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="E5V-sp-2kO" secondAttribute="bottom" id="V6c-bC-XeC"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="E5V-sp-2kO" secondAttribute="trailing" id="hmm-g4-eAi"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="27Q-eE-nAf"/>
                     <connections>
-                        <outlet property="tableView" destination="3C3-M2-t4G" id="FTa-dc-Lh3"/>
+                        <outlet property="tableView" destination="E5V-sp-2kO" id="Uol-kR-xJn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 enum HomeType {
     case title
@@ -15,7 +16,12 @@ enum HomeType {
 
 struct HomeModel {
     var type : HomeType
+    
     var title = ""
+    var fontStyle = UIFont()
+    
+    var titleFolder = ""
+    var imageFolder = ""
     var countNote = 0
     
     init(type: HomeType) {

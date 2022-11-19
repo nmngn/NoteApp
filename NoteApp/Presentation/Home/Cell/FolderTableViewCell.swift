@@ -9,15 +9,18 @@ import UIKit
 
 class FolderTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var countLabel: UILabel!
+    @IBOutlet weak var titleFolder: UILabel!
+    @IBOutlet weak var imageFolder: UIImageView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    
+    func setupData(data: HomeModel) {
+        imageFolder.image = UIImage(named: data.imageFolder)
+        titleFolder.text = data.titleFolder
+        countLabel.text = "\(data.countNote)"
     }
     
 }

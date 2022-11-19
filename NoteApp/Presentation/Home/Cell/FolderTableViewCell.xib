@@ -22,21 +22,21 @@
                         <rect key="frame" x="16" y="8" width="324" height="45"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XUx-2F-1Ju">
-                                <rect key="frame" x="16" y="4.5" width="36" height="36"/>
+                                <rect key="frame" x="16" y="6.5" width="32" height="32"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="36" id="pEK-yv-tlg"/>
-                                    <constraint firstAttribute="width" constant="36" id="zWD-np-x3N"/>
+                                    <constraint firstAttribute="height" constant="32" id="pEK-yv-tlg"/>
+                                    <constraint firstAttribute="width" constant="32" id="zWD-np-x3N"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0ls-J3-md2">
-                                <rect key="frame" x="60" y="12" width="42" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <rect key="frame" x="56" y="13" width="41.5" height="19.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e1H-cN-3Qc">
-                                <rect key="frame" x="274" y="12" width="42" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <rect key="frame" x="280.5" y="14" width="35.5" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -46,6 +46,7 @@
                             <constraint firstItem="0ls-J3-md2" firstAttribute="leading" secondItem="XUx-2F-1Ju" secondAttribute="trailing" constant="8" id="Mez-Zc-2Bd"/>
                             <constraint firstItem="e1H-cN-3Qc" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="0ls-J3-md2" secondAttribute="trailing" constant="8" id="O6D-7C-Wvo"/>
                             <constraint firstAttribute="trailing" secondItem="e1H-cN-3Qc" secondAttribute="trailing" constant="8" id="Yzh-k9-Ngw"/>
+                            <constraint firstAttribute="height" constant="45" id="cJC-Pv-he3"/>
                             <constraint firstItem="e1H-cN-3Qc" firstAttribute="centerY" secondItem="wiG-12-9bi" secondAttribute="centerY" id="eOj-R9-snB"/>
                             <constraint firstItem="XUx-2F-1Ju" firstAttribute="leading" secondItem="wiG-12-9bi" secondAttribute="leading" constant="16" id="fnd-hN-Z8s"/>
                             <constraint firstItem="XUx-2F-1Ju" firstAttribute="centerY" secondItem="wiG-12-9bi" secondAttribute="centerY" id="ktN-1I-BZk"/>
@@ -67,6 +68,11 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <connections>
+                <outlet property="countLabel" destination="e1H-cN-3Qc" id="zO3-ml-Foa"/>
+                <outlet property="imageFolder" destination="XUx-2F-1Ju" id="rTa-AY-aQV"/>
+                <outlet property="titleFolder" destination="0ls-J3-md2" id="LuT-Db-W2S"/>
+            </connections>
             <point key="canvasLocation" x="155.07246376811597" y="122.87946428571428"/>
         </tableViewCell>
     </objects>

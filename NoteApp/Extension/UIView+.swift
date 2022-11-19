@@ -48,13 +48,3 @@ extension UIImageView {
         addSubview(blurEffectView)
     }
 }
-
-extension UIImage {
-    func toHierachicalImage() -> UIImage {
-        if self.traitCollection.userInterfaceStyle == .light {
-            return self.withTintColor(.black, renderingMode: .alwaysOriginal)
-        } else {
-            return self.withTintColor(.white, renderingMode: .alwaysOriginal)
-        }
-    }
-}
