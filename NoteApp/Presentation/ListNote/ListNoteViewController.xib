@@ -27,7 +27,7 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j0O-oy-sGT">
-                    <rect key="frame" x="0.0" y="826" width="414" height="70"/>
+                    <rect key="frame" x="0.0" y="806" width="414" height="90"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="30 Notes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e8x-fP-6VK">
                             <rect key="frame" x="178" y="8" width="58.5" height="17"/>
@@ -49,7 +49,7 @@
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="70" id="342-iT-0rt"/>
+                        <constraint firstAttribute="height" constant="90" id="342-iT-0rt"/>
                         <constraint firstItem="oFq-85-YGb" firstAttribute="centerY" secondItem="e8x-fP-6VK" secondAttribute="centerY" id="FwF-5N-9OS"/>
                         <constraint firstItem="e8x-fP-6VK" firstAttribute="top" secondItem="j0O-oy-sGT" secondAttribute="top" constant="8" id="N75-i5-nfF"/>
                         <constraint firstAttribute="trailing" secondItem="oFq-85-YGb" secondAttribute="trailing" constant="16" id="p2E-jT-a9H"/>

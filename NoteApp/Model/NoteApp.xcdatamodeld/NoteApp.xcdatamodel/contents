@@ -9,11 +9,12 @@
         <attribute name="dateTime" optional="YES" attributeType="String"/>
         <attribute name="detail" optional="YES" attributeType="String"/>
         <attribute name="idNote" optional="YES" attributeType="String"/>
+        <attribute name="isLock" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="title" optional="YES" attributeType="String"/>
         <relationship name="oFolder" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="FolderEntity" inverseName="hasNote" inverseEntity="FolderEntity"/>
     </entity>
     <elements>
         <element name="FolderEntity" positionX="-54" positionY="18" width="128" height="74"/>
-        <element name="NoteEntity" positionX="-63" positionY="-18" width="128" height="104"/>
+        <element name="NoteEntity" positionX="-63" positionY="-18" width="128" height="119"/>
     </elements>
 </model>

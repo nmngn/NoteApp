@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NoteContentViewController" customModule="NoteApp" customModuleProvider="target">
+            <connections>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="noC-TF-64S">
+                    <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ldj-nq-r4v">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="928"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ePo-T0-QAF">
+                                    <rect key="frame" x="12" y="8" width="390" height="17"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="x7v-Ua-mVj">
+                                    <rect key="frame" x="8" y="25" width="398" height="903"/>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                    <color key="textColor" systemColor="labelColor"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                </textView>
+                            </subviews>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="ePo-T0-QAF" secondAttribute="trailing" constant="12" id="1ki-de-YP7"/>
+                                <constraint firstItem="ePo-T0-QAF" firstAttribute="top" secondItem="ldj-nq-r4v" secondAttribute="top" constant="8" id="ATR-6R-dbw"/>
+                                <constraint firstItem="ePo-T0-QAF" firstAttribute="leading" secondItem="ldj-nq-r4v" secondAttribute="leading" constant="12" id="Er2-ql-kkP"/>
+                                <constraint firstItem="x7v-Ua-mVj" firstAttribute="top" secondItem="ePo-T0-QAF" secondAttribute="bottom" id="G6r-p9-gKZ"/>
+                                <constraint firstAttribute="trailing" secondItem="x7v-Ua-mVj" secondAttribute="trailing" constant="8" id="a3t-VI-29g"/>
+                                <constraint firstItem="x7v-Ua-mVj" firstAttribute="leading" secondItem="ldj-nq-r4v" secondAttribute="leading" constant="8" id="kRX-xd-6QI"/>
+                                <constraint firstAttribute="bottom" secondItem="x7v-Ua-mVj" secondAttribute="bottom" id="x2t-A8-fIq"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="ldj-nq-r4v" secondAttribute="bottom" id="RGi-4C-6Hs"/>
+                        <constraint firstAttribute="trailing" secondItem="ldj-nq-r4v" secondAttribute="trailing" id="WTs-kF-2H6"/>
+                        <constraint firstItem="ldj-nq-r4v" firstAttribute="top" secondItem="noC-TF-64S" secondAttribute="top" id="dvg-mD-Ozb"/>
+                        <constraint firstItem="ldj-nq-r4v" firstAttribute="leading" secondItem="noC-TF-64S" secondAttribute="leading" id="gTm-k6-ttG"/>
+                    </constraints>
+                </scrollView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="noC-TF-64S" secondAttribute="bottom" id="9Qs-Fd-bB3"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="noC-TF-64S" secondAttribute="trailing" id="BLg-bV-4CI"/>
+                <constraint firstItem="noC-TF-64S" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="LeM-kh-3p9"/>
+                <constraint firstItem="ldj-nq-r4v" firstAttribute="width" secondItem="noC-TF-64S" secondAttribute="width" id="OBh-nb-1ek"/>
+                <constraint firstItem="noC-TF-64S" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="U7R-aS-oBh"/>
+                <constraint firstItem="ldj-nq-r4v" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.142857" constant="800" id="hbz-jN-8k7"/>
+            </constraints>
+            <point key="canvasLocation" x="131.8840579710145" y="117.85714285714285"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

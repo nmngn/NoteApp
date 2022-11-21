@@ -103,7 +103,8 @@ extension ListNoteViewController: UITableViewDelegate, UITableViewDataSource {
         
         switch model.type {
         case .item:
-            print("0")
+            let vc = NoteContentViewController.init(nibName: NoteContentViewController.className, bundle: nil)
+            self.navigationController?.pushViewController(vc, animated: true)
         default:
             break
         }
