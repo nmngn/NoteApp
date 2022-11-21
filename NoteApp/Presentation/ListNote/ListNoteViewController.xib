@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ListNoteViewController" customModule="NoteApp" customModuleProvider="target">
+            <connections>
+                <outlet property="tableView" destination="Xrm-DJ-M3m" id="NEc-cu-KgD"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Xrm-DJ-M3m">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </tableView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j0O-oy-sGT">
+                    <rect key="frame" x="0.0" y="826" width="414" height="70"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="30 Notes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e8x-fP-6VK">
+                            <rect key="frame" x="178" y="8" width="58.5" height="17"/>
+                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oFq-85-YGb">
+                            <rect key="frame" x="362" y="-1.5" width="36" height="36"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="36" id="2DR-4U-vzg"/>
+                                <constraint firstAttribute="height" constant="36" id="vNV-k8-z7w"/>
+                            </constraints>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            <state key="normal">
+                                <imageReference key="image" image="square.and.pencil" catalog="system" symbolScale="large" renderingMode="template"/>
+                            </state>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="70" id="342-iT-0rt"/>
+                        <constraint firstItem="oFq-85-YGb" firstAttribute="centerY" secondItem="e8x-fP-6VK" secondAttribute="centerY" id="FwF-5N-9OS"/>
+                        <constraint firstItem="e8x-fP-6VK" firstAttribute="top" secondItem="j0O-oy-sGT" secondAttribute="top" constant="8" id="N75-i5-nfF"/>
+                        <constraint firstAttribute="trailing" secondItem="oFq-85-YGb" secondAttribute="trailing" constant="16" id="p2E-jT-a9H"/>
+                        <constraint firstItem="e8x-fP-6VK" firstAttribute="centerX" secondItem="j0O-oy-sGT" secondAttribute="centerX" id="pM4-bU-tws"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" name="NewBG"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="Xrm-DJ-M3m" secondAttribute="trailing" id="148-In-0Fb"/>
+                <constraint firstItem="j0O-oy-sGT" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="6jA-14-R2g"/>
+                <constraint firstItem="Xrm-DJ-M3m" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="S20-eR-AbY"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="Xrm-DJ-M3m" secondAttribute="bottom" id="aTv-Bj-wq1"/>
+                <constraint firstItem="j0O-oy-sGT" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="gxl-pd-zX1"/>
+                <constraint firstAttribute="bottom" secondItem="j0O-oy-sGT" secondAttribute="bottom" id="pdx-6B-TNv"/>
+                <constraint firstItem="Xrm-DJ-M3m" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="zNx-nC-Cnf"/>
+            </constraints>
+            <point key="canvasLocation" x="131.8840579710145" y="117.85714285714285"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="square.and.pencil" catalog="system" width="128" height="115"/>
+        <namedColor name="NewBG">
+            <color red="0.96100002527236938" green="0.9649999737739563" blue="0.98000001907348633" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

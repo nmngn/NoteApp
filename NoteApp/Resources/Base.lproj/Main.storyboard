@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -21,13 +22,45 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mLe-NR-B1J">
+                                <rect key="frame" x="350" y="798" width="48" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="1yL-Sl-SHg"/>
+                                    <constraint firstAttribute="width" constant="48" id="y3o-AZ-WDC"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal">
+                                    <imageReference key="image" image="square.and.pencil" catalog="system" symbolScale="large" renderingMode="template"/>
+                                </state>
+                                <connections>
+                                    <action selector="addQUickNote:" destination="BYZ-38-t0r" eventType="touchUpInside" id="68y-9T-6AX"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="no6-L5-7Pe">
+                                <rect key="frame" x="16" y="798" width="48" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="48" id="NMp-zG-agU"/>
+                                    <constraint firstAttribute="height" constant="48" id="f3v-3e-e3n"/>
+                                </constraints>
+                                <state key="normal">
+                                    <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <imageReference key="image" image="folder.badge.plus" catalog="system" symbolScale="large" renderingMode="template"/>
+                                </state>
+                                <connections>
+                                    <action selector="addFolder:" destination="BYZ-38-t0r" eventType="touchUpInside" id="FvN-ji-pyl"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" name="NewBG"/>
                         <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="mLe-NR-B1J" secondAttribute="trailing" constant="16" id="22B-ba-qOf"/>
                             <constraint firstItem="E5V-sp-2kO" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="3vS-X6-y38"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="no6-L5-7Pe" secondAttribute="bottom" constant="16" id="CRx-Ib-uiz"/>
                             <constraint firstItem="E5V-sp-2kO" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="N1c-fc-I0O"/>
+                            <constraint firstItem="no6-L5-7Pe" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="UUa-ap-qTH"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="E5V-sp-2kO" secondAttribute="bottom" id="V6c-bC-XeC"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="mLe-NR-B1J" secondAttribute="bottom" constant="16" id="fo0-cv-Ohw"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="E5V-sp-2kO" secondAttribute="trailing" id="hmm-g4-eAi"/>
                         </constraints>
                     </view>
@@ -60,6 +93,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="folder.badge.plus" catalog="system" width="128" height="91"/>
+        <image name="square.and.pencil" catalog="system" width="128" height="115"/>
         <namedColor name="NewBG">
             <color red="0.96100002527236938" green="0.9649999737739563" blue="0.98000001907348633" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

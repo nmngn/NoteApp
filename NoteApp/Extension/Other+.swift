@@ -104,30 +104,6 @@ extension CGFloat {
     }
 }
 
-func parseCategory(_ text: String) -> String {
-    switch text {
-    case "car":
-        return "Xe cộ"
-    case "device":
-        return "Máy móc"
-    case "health":
-        return "Sức khoẻ"
-    case "house":
-        return "Nhà cửa"
-    case "office":
-        return "Công việc"
-    case "food":
-        return "Ăn uống"
-    case "shopping":
-        return "Mua sắm"
-    case "other":
-        return "Khác"
-    default:
-        break
-    }
-    return ""
-}
-
 extension UILabel {
     func autoResize() {
         self.adjustsFontSizeToFitWidth = true

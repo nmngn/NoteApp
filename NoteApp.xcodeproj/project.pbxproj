@@ -31,6 +31,11 @@
 		D8C336DC2921FFE70008527A /* Color.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D8C336DB2921FFE70008527A /* Color.xcassets */; };
 		D8C336DE292200CE0008527A /* FolderEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C336DD292200CE0008527A /* FolderEntity.swift */; };
 		D8C336E02922010D0008527A /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C336DF2922010D0008527A /* CoreDataManager.swift */; };
+		D8F6C6C2292B204F00EF1A5F /* ListNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F6C6C0292B204F00EF1A5F /* ListNoteViewController.swift */; };
+		D8F6C6C3292B204F00EF1A5F /* ListNoteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8F6C6C1292B204F00EF1A5F /* ListNoteViewController.xib */; };
+		D8F6C6C7292B28EE00EF1A5F /* ListNoteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F6C6C6292B28EE00EF1A5F /* ListNoteModel.swift */; };
+		D8F6C6CA292B2FB300EF1A5F /* ItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F6C6C8292B2FB300EF1A5F /* ItemTableViewCell.swift */; };
+		D8F6C6CB292B2FB300EF1A5F /* ItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8F6C6C9292B2FB300EF1A5F /* ItemTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +67,11 @@
 		D8C336DB2921FFE70008527A /* Color.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Color.xcassets; sourceTree = "<group>"; };
 		D8C336DD292200CE0008527A /* FolderEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderEntity.swift; sourceTree = "<group>"; };
 		D8C336DF2922010D0008527A /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		D8F6C6C0292B204F00EF1A5F /* ListNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListNoteViewController.swift; sourceTree = "<group>"; };
+		D8F6C6C1292B204F00EF1A5F /* ListNoteViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListNoteViewController.xib; sourceTree = "<group>"; };
+		D8F6C6C6292B28EE00EF1A5F /* ListNoteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListNoteModel.swift; sourceTree = "<group>"; };
+		D8F6C6C8292B2FB300EF1A5F /* ItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemTableViewCell.swift; sourceTree = "<group>"; };
+		D8F6C6C9292B2FB300EF1A5F /* ItemTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ItemTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,6 +171,7 @@
 		D8C336D22921ED4E0008527A /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				D8F6C6BF292B1DCA00EF1A5F /* ListNote */,
 				D8C336D82921FE630008527A /* Home */,
 			);
 			path = Presentation;
@@ -196,6 +207,34 @@
 				D8C336D92921FE7D0008527A /* HomeController.swift */,
 			);
 			path = Home;
+			sourceTree = "<group>";
+		};
+		D8F6C6BF292B1DCA00EF1A5F /* ListNote */ = {
+			isa = PBXGroup;
+			children = (
+				D8F6C6C5292B28DC00EF1A5F /* Cell */,
+				D8F6C6C4292B28D600EF1A5F /* Model */,
+				D8F6C6C0292B204F00EF1A5F /* ListNoteViewController.swift */,
+				D8F6C6C1292B204F00EF1A5F /* ListNoteViewController.xib */,
+			);
+			path = ListNote;
+			sourceTree = "<group>";
+		};
+		D8F6C6C4292B28D600EF1A5F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D8F6C6C6292B28EE00EF1A5F /* ListNoteModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		D8F6C6C5292B28DC00EF1A5F /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				D8F6C6C8292B2FB300EF1A5F /* ItemTableViewCell.swift */,
+				D8F6C6C9292B2FB300EF1A5F /* ItemTableViewCell.xib */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		F4C65CCA9943866D7D3FD387 /* Frameworks */ = {
@@ -270,6 +309,8 @@
 				D80FA522292490F600D0B9ED /* FolderTableViewCell.xib in Resources */,
 				D8C336C82921E8470008527A /* LaunchScreen.storyboard in Resources */,
 				D8C336DC2921FFE70008527A /* Color.xcassets in Resources */,
+				D8F6C6CB292B2FB300EF1A5F /* ItemTableViewCell.xib in Resources */,
+				D8F6C6C3292B204F00EF1A5F /* ListNoteViewController.xib in Resources */,
 				D80FA5262924910500D0B9ED /* SearchTableViewCell.xib in Resources */,
 				D8C336C52921E8470008527A /* Assets.xcassets in Resources */,
 				D8C336C02921E8460008527A /* Main.storyboard in Resources */,
@@ -329,6 +370,7 @@
 				D80FA521292490F600D0B9ED /* FolderTableViewCell.swift in Sources */,
 				D8C336B92921E8460008527A /* AppDelegate.swift in Sources */,
 				D8C336DE292200CE0008527A /* FolderEntity.swift in Sources */,
+				D8F6C6CA292B2FB300EF1A5F /* ItemTableViewCell.swift in Sources */,
 				D80FA5252924910500D0B9ED /* SearchTableViewCell.swift in Sources */,
 				D80FA5352924D10400D0B9ED /* UITextField+.swift in Sources */,
 				D80FA5332924D10400D0B9ED /* String+.swift in Sources */,
@@ -338,7 +380,9 @@
 				D8C336E02922010D0008527A /* CoreDataManager.swift in Sources */,
 				D80FA5312924D10400D0B9ED /* UIViewController+.swift in Sources */,
 				D80FA5342924D10400D0B9ED /* UIView+.swift in Sources */,
+				D8F6C6C7292B28EE00EF1A5F /* ListNoteModel.swift in Sources */,
 				D80FA5302924D10400D0B9ED /* UITableView+.swift in Sources */,
+				D8F6C6C2292B204F00EF1A5F /* ListNoteViewController.swift in Sources */,
 				D80FA5192924902B00D0B9ED /* TitleTableViewCell.swift in Sources */,
 				D8C336DA2921FE7D0008527A /* HomeController.swift in Sources */,
 			);

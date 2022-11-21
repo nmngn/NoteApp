@@ -1,24 +1,21 @@
 //
-//  HomeController.swift
+//  ListNoteViewController.swift
 //  NoteApp
 //
-//  Created by Nam Nguyễn on 14/11/2022.
+//  Created by Nam Nguyễn on 21/11/2022.
 //
 
-import Foundation
 import UIKit
-import Then
-import CoreData
-import ESPullToRefresh
 
-class HomeController: UIViewController {
+class ListNoteViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
-    
-    var model = [HomeModel]()
+    var model = [ListNoteModel]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.isNavigationBarHidden = false
+        setupNavigationButton()
         configView()
         setupData()
     }
@@ -30,7 +27,7 @@ class HomeController: UIViewController {
             $0.tableFooterView = UIView()
             $0.separatorStyle = .none
             $0.registerNibCellFor(type: TitleTableViewCell.self)
-            $0.registerNibCellFor(type: FolderTableViewCell.self)
+            $0.registerNibCellFor(type: ItemTableViewCell.self)
             $0.registerNibCellFor(type: SearchTableViewCell.self)
             $0.keyboardDismissMode = .onDrag
             $0.scrollsToTop = false
@@ -39,35 +36,26 @@ class HomeController: UIViewController {
     
     func setupData() {
         self.model.removeAll()
-        var title = HomeModel(type: .title)
-        title.title = "Folders"
+        var title = ListNoteModel(type: .title)
+        title.title = "Notes"
         title.fontStyle = UIFont.boldSystemFont(ofSize: 18)
         
-        let search = HomeModel(type: .search)
+        let search = ListNoteModel(type: .search)
         
-        var otherTitle = HomeModel(type: .title)
-        otherTitle.title = "Other"
-        otherTitle.fontStyle = UIFont.systemFont(ofSize: 16, weight: .semibold)
-        
-        var quickFolder = HomeModel(type: .folder)
-        quickFolder.imageFolder = "quick_folder_icon"
-        quickFolder.titleFolder = "Quick Note"
-        quickFolder.countNote = 0
-        
-        var folder = HomeModel(type: .folder)
-        folder.imageFolder = "folder_icon"
-        folder.titleFolder = "Hihi"
-        folder.countNote = 1
+        var item = ListNoteModel(type: .item)
+
         
         self.model.append(title)
         self.model.append(search)
-        self.model.append(quickFolder)
-        self.model.append(otherTitle)
-        self.model.append(folder)
+        self.model.append(item)
+        self.model.append(item)
+        self.model.append(item)
+        self.model.append(item)
+
         self.tableView.reloadData()
     }
     
-    func modelIndexPath(index: IndexPath) -> HomeModel {
+    func modelIndexPath(index: IndexPath) -> ListNoteModel {
         return model[index.row]
     }
     
@@ -78,16 +66,15 @@ class HomeController: UIViewController {
     @IBAction func addQUickNote(_ sender: UIButton) {
         
     }
-    
 }
 
-extension HomeController: UITableViewDelegate, UITableViewDataSource {
+extension ListNoteViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.model.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var model: HomeModel
+        var model: ListNoteModel
         model = modelIndexPath(index: indexPath)
         
         switch model.type {
@@ -97,11 +84,10 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource {
             cell.selectionStyle = .none
             cell.setupData(data: model)
             return cell
-        case .folder:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "FolderTableViewCell", for: indexPath)
-                    as? FolderTableViewCell else { return UITableViewCell() }
+        case .item:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "ItemTableViewCell", for: indexPath)
+                    as? ItemTableViewCell else { return UITableViewCell() }
             cell.selectionStyle = .none
-            cell.setupData(data: model)
             return cell
         case .search:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "SearchTableViewCell", for: indexPath)
@@ -112,13 +98,12 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        var model: HomeModel
+        var model: ListNoteModel
         model = modelIndexPath(index: indexPath)
         
         switch model.type {
-        case .folder:
-            let vc = ListNoteViewController.init(nibName: ListNoteViewController.className, bundle: nil)
-            self.navigationController?.pushViewController(vc, animated: true)
+        case .item:
+            print("0")
         default:
             break
         }

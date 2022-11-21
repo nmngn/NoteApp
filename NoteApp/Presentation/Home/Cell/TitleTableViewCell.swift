@@ -15,8 +15,8 @@ class TitleTableViewCell: UITableViewCell {
         super.awakeFromNib()
     }
 
-    func setupData(data: HomeModel) {
-        titleLabel.text = data.title
-        titleLabel.font = data.fontStyle
+    func setupData(data: DataCellArgument) {
+        titleLabel.text = data.getTitle()
+        titleLabel.font = data.getFont()
     }
 }
