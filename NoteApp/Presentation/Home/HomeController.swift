@@ -16,11 +16,38 @@ class HomeController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var model = [HomeModel]()
+    var listFolder: [NSManagedObject] = []
+    var dispatchGroup = DispatchGroup()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configView()
         setupData()
+        getData()
+    }
+    
+    func getData() {
+        dispatchGroup.enter()
+        fetchData()
+        dispatchGroup.leave()
+        
+        dispatchGroup.notify(queue: .main) {
+            self.tableView.reloadData()
+        }
+    }
+    
+    func fetchData() {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        let managedContext = appDelegate.persistentContainer.viewContext
+        
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "FolderEntity")
+        
+        do {
+            listFolder = try managedContext.fetch(fetchRequest)
+            self.tableView.reloadData()
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+        }
     }
     
     func configView() {
