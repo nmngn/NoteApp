@@ -14,13 +14,46 @@ class ListNoteViewController: UIViewController {
     
     var idFolder = ""
     var model = [ListNoteModel]()
+    var listNote: [NSManagedObject] = [] {
+        didSet {
+            self.setupData()
+        }
+    }
+    let dispatchGroup = DispatchGroup()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.isNavigationBarHidden = false
         setupNavigationButton()
         configView()
-        setupData()
+    }
+    
+    func getData() {
+        dispatchGroup.enter()
+        fetchData()
+        dispatchGroup.leave()
+        
+        dispatchGroup.notify(queue: .main) {
+            self.tableView.reloadData()
+        }
+    }
+    
+    func fetchData() {
+        let managedContext = getContext()
+        
+        let fetchNoteRequest = NSFetchRequest<NSManagedObject>(entityName: "NoteEntity")
+        fetchNoteRequest.predicate = NSPredicate(format: "idFolder = %@", self.idFolder)
+
+        do {
+            listNote = try managedContext.fetch(fetchNoteRequest)
+
+            for item in listNote {
+            }
+            
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+        }
+        self.tableView.es.stopPullToRefresh()
     }
     
     func configView() {
@@ -56,24 +89,14 @@ class ListNoteViewController: UIViewController {
     }
     
     @IBAction func addNote(_ sender: UIButton) {
-        
+        let vc = NoteContentViewController.init(nibName: NoteContentViewController.className, bundle: nil)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
-    func createNote(folderTitle: String) {
-        let context = getContext()
-        let entity = NSEntityDescription.entity(forEntityName: "NoteEntity", in: context)!
-        let folder = NSManagedObject(entity: entity, insertInto: context)
-        
-        folder.setValue(folderTitle, forKey: "title")
-        folder.setValue(UUID().uuidString, forKey: "idFolder")
-        
-        do {
-            try context.save()
-            self.tableView.es.startPullToRefresh()
-        } catch let error as NSError {
-            print("Could not save. \(error), \(error.userInfo)")
-        }
-    }
+//    func parseToListNote(item: NSManagedObject) -> ListNoteModel {
+//        var data: ListNoteModel
+//        return data
+//    }
     
     func deleteNote(id: String) {
         let context = getContext()

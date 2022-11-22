@@ -132,7 +132,8 @@ class HomeController: UIViewController {
     }
     
     @IBAction func addQUickNote(_ sender: UIButton) {
-
+        let vc = NoteContentViewController.init(nibName: NoteContentViewController.className, bundle: nil)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     func createFolder(folderTitle: String) {

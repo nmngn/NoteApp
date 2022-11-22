@@ -12,6 +12,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NoteContentViewController" customModule="NoteApp" customModuleProvider="target">
             <connections>
                 <outlet property="bottomConstraint" destination="9Qs-Fd-bB3" id="6yJ-7X-tkb"/>
+                <outlet property="textView" destination="x7v-Ua-mVj" id="yOP-hz-Icf"/>
                 <outlet property="timeLabel" destination="ePo-T0-QAF" id="Gcv-1b-zDs"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -28,13 +29,16 @@
                             <rect key="frame" x="0.0" y="0.0" width="414" height="928"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ePo-T0-QAF">
-                                    <rect key="frame" x="12" y="8" width="390" height="17"/>
+                                    <rect key="frame" x="12" y="8" width="390" height="20"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="20" id="Fsp-Un-oqV"/>
+                                    </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="x7v-Ua-mVj">
-                                    <rect key="frame" x="8" y="25" width="398" height="903"/>
+                                    <rect key="frame" x="8" y="28" width="398" height="900"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     <color key="textColor" systemColor="labelColor"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
