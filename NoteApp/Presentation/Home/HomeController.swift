@@ -115,7 +115,7 @@ class HomeController: UIViewController {
     
     @IBAction func addFolder(_ sender: UIButton) {
         var textField = UITextField()
-        let alertController = UIAlertController(title: "Create folder", message: "", preferredStyle: .alert)
+        let alertController = UIAlertController(title: "Create folder", message: "Create new folder", preferredStyle: .alert)
         let createAction = UIAlertAction(title: "Create", style: .default) { [weak self] _ in
             if let text = textField.text, !text.isEmpty {
                 self?.createFolder(folderTitle: text)
@@ -166,7 +166,6 @@ class HomeController: UIViewController {
             print("Could not delete. \(error), \(error.userInfo)")
         }
     }
-    
 }
 
 extension HomeController: UITableViewDelegate, UITableViewDataSource {
@@ -206,6 +205,7 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource {
         switch model.type {
         case .folder:
             let vc = ListNoteViewController.init(nibName: ListNoteViewController.className, bundle: nil)
+            vc.idFolder = model.idFolder
             self.navigationController?.pushViewController(vc, animated: true)
         default:
             break

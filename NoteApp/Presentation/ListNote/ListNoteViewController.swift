@@ -6,10 +6,13 @@
 //
 
 import UIKit
+import CoreData
 
 class ListNoteViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
+    
+    var idFolder = ""
     var model = [ListNoteModel]()
     
     override func viewDidLoad() {
@@ -42,15 +45,8 @@ class ListNoteViewController: UIViewController {
         
         let search = ListNoteModel(type: .search)
         
-        var item = ListNoteModel(type: .item)
-
-        
         self.model.append(title)
         self.model.append(search)
-        self.model.append(item)
-        self.model.append(item)
-        self.model.append(item)
-        self.model.append(item)
 
         self.tableView.reloadData()
     }
@@ -59,12 +55,40 @@ class ListNoteViewController: UIViewController {
         return model[index.row]
     }
     
-    @IBAction func addFolder(_ sender: UIButton) {
+    @IBAction func addNote(_ sender: UIButton) {
         
     }
     
-    @IBAction func addQUickNote(_ sender: UIButton) {
+    func createNote(folderTitle: String) {
+        let context = getContext()
+        let entity = NSEntityDescription.entity(forEntityName: "NoteEntity", in: context)!
+        let folder = NSManagedObject(entity: entity, insertInto: context)
         
+        folder.setValue(folderTitle, forKey: "title")
+        folder.setValue(UUID().uuidString, forKey: "idFolder")
+        
+        do {
+            try context.save()
+            self.tableView.es.startPullToRefresh()
+        } catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
+        }
+    }
+    
+    func deleteNote(id: String) {
+        let context = getContext()
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "FolderEntity")
+        request.predicate = NSPredicate(format: "idFolder = %@", id)
+
+        do {
+            let result = try context.fetch(request)
+            for object in result {
+                context.delete(object as! NSManagedObject)
+            }
+            try context.save()
+        } catch let error as NSError {
+            print("Could not delete. \(error), \(error.userInfo)")
+        }
     }
 }
 
@@ -110,10 +134,18 @@ extension ListNoteViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
-    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
     }
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if (editingStyle == .delete) {
+//            self.tableView.beginUpdates()
+//            self.deleteNote(id: self.model[indexPath.row].idFolder)
+//            self.model.remove(at: indexPath.row)
+//            self.tableView.deleteRows(at: [indexPath], with: .none)
+//            self.tableView.endUpdates()
+        }
     }
+
 }

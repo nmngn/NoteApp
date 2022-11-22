@@ -45,6 +45,9 @@
                             <state key="normal">
                                 <imageReference key="image" image="square.and.pencil" catalog="system" symbolScale="large" renderingMode="template"/>
                             </state>
+                            <connections>
+                                <action selector="addNote:" destination="-1" eventType="touchUpInside" id="H7n-kk-LFb"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
