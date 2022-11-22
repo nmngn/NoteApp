@@ -38,6 +38,7 @@
 		D8F6C6CB292B2FB300EF1A5F /* ItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8F6C6C9292B2FB300EF1A5F /* ItemTableViewCell.xib */; };
 		D8F6C6CF292B639500EF1A5F /* NoteContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F6C6CD292B639500EF1A5F /* NoteContentViewController.swift */; };
 		D8F6C6D0292B639500EF1A5F /* NoteContentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8F6C6CE292B639500EF1A5F /* NoteContentViewController.xib */; };
+		D8F6C6D5292C72D900EF1A5F /* MLTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = D8F6C6D3292C72D900EF1A5F /* MLTransition.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -76,6 +77,9 @@
 		D8F6C6C9292B2FB300EF1A5F /* ItemTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ItemTableViewCell.xib; sourceTree = "<group>"; };
 		D8F6C6CD292B639500EF1A5F /* NoteContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteContentViewController.swift; sourceTree = "<group>"; };
 		D8F6C6CE292B639500EF1A5F /* NoteContentViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoteContentViewController.xib; sourceTree = "<group>"; };
+		D8F6C6D2292C72D900EF1A5F /* NoteApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NoteApp-Bridging-Header.h"; sourceTree = "<group>"; };
+		D8F6C6D3292C72D900EF1A5F /* MLTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLTransition.m; sourceTree = "<group>"; };
+		D8F6C6D4292C72D900EF1A5F /* MLTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLTransition.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,6 +161,7 @@
 			children = (
 				D8C336CF2921ECB60008527A /* Application */,
 				D80FA5282924D0EF00D0B9ED /* Extension */,
+				D8F6C6D1292C72C700EF1A5F /* Lib */,
 				D8C336D62921F3FF0008527A /* Model */,
 				D8C336D22921ED4E0008527A /* Presentation */,
 				D8C336D42921ED5C0008527A /* Resources */,
@@ -251,6 +256,16 @@
 			path = NoteContent;
 			sourceTree = "<group>";
 		};
+		D8F6C6D1292C72C700EF1A5F /* Lib */ = {
+			isa = PBXGroup;
+			children = (
+				D8F6C6D4292C72D900EF1A5F /* MLTransition.h */,
+				D8F6C6D3292C72D900EF1A5F /* MLTransition.m */,
+				D8F6C6D2292C72D900EF1A5F /* NoteApp-Bridging-Header.h */,
+			);
+			path = Lib;
+			sourceTree = "<group>";
+		};
 		F4C65CCA9943866D7D3FD387 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -293,6 +308,7 @@
 				TargetAttributes = {
 					D8C336B42921E8460008527A = {
 						CreatedOnToolsVersion = 13.2.1;
+						LastSwiftMigration = 1320;
 					};
 				};
 			};
@@ -392,6 +408,7 @@
 				D80FA5332924D10400D0B9ED /* String+.swift in Sources */,
 				D80FA5362924D10400D0B9ED /* Date+.swift in Sources */,
 				D80FA51529239BB000D0B9ED /* HomeModel.swift in Sources */,
+				D8F6C6D5292C72D900EF1A5F /* MLTransition.m in Sources */,
 				D8C336C32921E8460008527A /* NoteApp.xcdatamodeld in Sources */,
 				D8C336E02922010D0008527A /* CoreDataManager.swift in Sources */,
 				D80FA5312924D10400D0B9ED /* UIViewController+.swift in Sources */,
@@ -548,6 +565,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 3JQK33626M;
@@ -567,6 +585,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.tuicoding.NoteApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "NoteApp/Lib/NoteApp-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -578,6 +598,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 3JQK33626M;
@@ -597,6 +618,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.tuicoding.NoteApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "NoteApp/Lib/NoteApp-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

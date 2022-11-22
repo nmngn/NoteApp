@@ -6,8 +6,16 @@
 //
 
 import UIKit
+import CoreData
 
 extension UIViewController {
+    func getContext() -> NSManagedObjectContext {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return NSManagedObjectContext.init(concurrencyType: .mainQueueConcurrencyType)}
+        let managedContext = appDelegate.persistentContainer.viewContext
+        return managedContext
+    }
+    
     class func instantiateViewControllerFromStoryboard(storyboardName: String) -> Self {
         return instantiateFromStoryboardHelper(storyboardName: storyboardName, storyboardId: self.className)
     }

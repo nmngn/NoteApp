@@ -16,13 +16,17 @@ class HomeController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var model = [HomeModel]()
-    var listFolder: [NSManagedObject] = []
+    var listFolder: [NSManagedObject] = [] {
+        didSet {
+            setupData()
+        }
+    }
+    var listNote: [NSManagedObject] = []
     var dispatchGroup = DispatchGroup()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configView()
-        setupData()
         getData()
     }
     
@@ -37,17 +41,23 @@ class HomeController: UIViewController {
     }
     
     func fetchData() {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
-        let managedContext = appDelegate.persistentContainer.viewContext
+        let managedContext = getContext()
         
-        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "FolderEntity")
+        let fetchFolderRequest = NSFetchRequest<NSManagedObject>(entityName: "FolderEntity")
+        let fetchNoteRequest = NSFetchRequest<NSManagedObject>(entityName: "NoteEntity")
         
         do {
-            listFolder = try managedContext.fetch(fetchRequest)
-            self.tableView.reloadData()
+            listFolder = try managedContext.fetch(fetchFolderRequest)
+            listNote = try managedContext.fetch(fetchNoteRequest)
+            
+            for item in listFolder {
+                self.model.append(parseToHomeModel(item: item))
+            }
+            
         } catch let error as NSError {
             print("Could not fetch. \(error), \(error.userInfo)")
         }
+        self.tableView.es.stopPullToRefresh()
     }
     
     func configView() {
@@ -61,8 +71,19 @@ class HomeController: UIViewController {
             $0.registerNibCellFor(type: SearchTableViewCell.self)
             $0.keyboardDismissMode = .onDrag
             $0.scrollsToTop = false
+            $0.es.addPullToRefresh { [weak self] in
+                self?.getData()
+            }
         }
     }
+    
+    func parseToHomeModel(item: NSManagedObject) -> HomeModel {
+        let id = item.value(forKey: "idFolder") as? String ?? ""
+        let text = item.value(forKey: "title") as? String ?? ""
+        let data = HomeModel(type: .folder, titleFolder: text, id: id)
+        return data
+    }
+    
     
     func setupData() {
         self.model.removeAll()
@@ -81,16 +102,10 @@ class HomeController: UIViewController {
         quickFolder.titleFolder = "Quick Note"
         quickFolder.countNote = 0
         
-        var folder = HomeModel(type: .folder)
-        folder.imageFolder = "folder_icon"
-        folder.titleFolder = "Hihi"
-        folder.countNote = 1
-        
         self.model.append(title)
         self.model.append(search)
         self.model.append(quickFolder)
         self.model.append(otherTitle)
-        self.model.append(folder)
         self.tableView.reloadData()
     }
     
@@ -99,11 +114,57 @@ class HomeController: UIViewController {
     }
     
     @IBAction func addFolder(_ sender: UIButton) {
-        
+        var textField = UITextField()
+        let alertController = UIAlertController(title: "Create folder", message: "", preferredStyle: .alert)
+        let createAction = UIAlertAction(title: "Create", style: .default) { [weak self] _ in
+            if let text = textField.text, !text.isEmpty {
+                self?.createFolder(folderTitle: text)
+            }
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alertController.addTextField { alertTextField in
+            alertTextField.placeholder = "Folder Title"
+            textField = alertTextField
+        }
+        alertController.addAction(createAction)
+        alertController.addAction(cancelAction)
+        present(alertController, animated: true, completion: nil)
     }
     
     @IBAction func addQUickNote(_ sender: UIButton) {
+
+    }
+    
+    func createFolder(folderTitle: String) {
+        let context = getContext()
+        let entity = NSEntityDescription.entity(forEntityName: "FolderEntity", in: context)!
+        let folder = NSManagedObject(entity: entity, insertInto: context)
         
+        folder.setValue(folderTitle, forKey: "title")
+        folder.setValue(UUID().uuidString, forKey: "idFolder")
+        
+        do {
+            try context.save()
+            self.tableView.es.startPullToRefresh()
+        } catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
+        }
+    }
+    
+    func deleteFolder(id: String) {
+        let context = getContext()
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "FolderEntity")
+        request.predicate = NSPredicate(format: "idFolder = %@", id)
+
+        do {
+            let result = try context.fetch(request)
+            for object in result {
+                context.delete(object as! NSManagedObject)
+            }
+            try context.save()
+        } catch let error as NSError {
+            print("Could not delete. \(error), \(error.userInfo)")
+        }
     }
     
 }
@@ -151,10 +212,17 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
-    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
     }
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if (editingStyle == .delete) {
+            self.tableView.beginUpdates()
+            self.deleteFolder(id: self.model[indexPath.row].idFolder)
+            self.model.remove(at: indexPath.row)
+            self.tableView.deleteRows(at: [indexPath], with: .none)
+            self.tableView.endUpdates()
+        }
     }
 }

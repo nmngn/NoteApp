@@ -25,12 +25,20 @@ struct HomeModel: DataCellArgument {
     var title = ""
     var fontStyle = UIFont()
     
+    var idFolder = ""
     var titleFolder = ""
-    var imageFolder = ""
+    var imageFolder = "folder_icon"
+    
     var countNote = 0
     
     init(type: HomeType) {
         self.type = type
+    }
+    
+    init(type: HomeType, titleFolder: String, id: String) {
+        self.type = type
+        self.titleFolder = titleFolder
+        self.idFolder = id
     }
     
     func getTitle() -> String {
