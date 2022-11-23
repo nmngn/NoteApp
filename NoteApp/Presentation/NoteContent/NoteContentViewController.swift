@@ -15,6 +15,9 @@ class NoteContentViewController: UIViewController {
     @IBOutlet weak var titleTextView: UITextView!
     @IBOutlet weak var contentTextView: UITextView!
     
+    var dataContent: ListNoteModel?
+    
+    var idNote = ""
     var idFolder = ""
     var isLock = false
     
@@ -27,10 +30,11 @@ class NoteContentViewController: UIViewController {
         setupNavigationButton()
         self.navigationController?.isNavigationBarHidden = false
         setupRightBarButton()
+        configComponent()
         setupData()
     }
     
-    func setupData() {
+    func configComponent() {
         timeLabel.text = getCurrentDate()
         titleTextView.delegate = self
         titleTextView.autocorrectionType = .no
@@ -39,6 +43,18 @@ class NoteContentViewController: UIViewController {
         contentTextView.autocorrectionType = .no
         contentTextView.isEditable = false
         scrollViewHeightConstraint.constant = 0
+    }
+    
+    func setupData() {
+        if let data = self.dataContent {
+            timeLabel.text = data.date
+            titleTextView.text = data.titleNote
+            contentTextView.text = data.contentNote
+            isLock = data.isLock
+            idNote = data.idNote
+            
+            contentTextView.isEditable = true
+        }
     }
     
     func setupRightBarButton() {
@@ -58,11 +74,20 @@ class NoteContentViewController: UIViewController {
     
     func saveData() {
         if !titleTextView.text.isEmpty && !contentTextView.text.isEmpty {
-            getDataToSave(title: titleTextView.text, content: contentTextView.text, isLock: isLock, idNote: UUID().uuidString, time: timeLabel.text ?? getCurrentDate())
+            getDataToSave(title: titleTextView.text, content: contentTextView.text
+                          , isLock: isLock
+                          , idNote: !self.idNote.isEmpty ? self.idNote : UUID().uuidString
+                          , time: timeLabel.text ?? getCurrentDate())
         } else if titleTextView.text.isEmpty && !contentTextView.text.isEmpty {
-            getDataToSave(title: "No title", content: contentTextView.text, isLock: isLock, idNote: UUID().uuidString, time: timeLabel.text ?? getCurrentDate())
+            getDataToSave(title: "No title", content: contentTextView.text
+                          , isLock: isLock
+                          , idNote: !self.idNote.isEmpty ? self.idNote : UUID().uuidString
+                          , time: timeLabel.text ?? getCurrentDate())
         } else if !titleTextView.text.isEmpty && contentTextView.text.isEmpty {
-            getDataToSave(title: titleTextView.text, content: "No content", isLock: isLock, idNote: UUID().uuidString, time: timeLabel.text ?? getCurrentDate())
+            getDataToSave(title: titleTextView.text, content: "No content"
+                          , isLock: isLock
+                          , idNote: !self.idNote.isEmpty ? self.idNote : UUID().uuidString
+                          , time: timeLabel.text ?? getCurrentDate())
         }
     }
     

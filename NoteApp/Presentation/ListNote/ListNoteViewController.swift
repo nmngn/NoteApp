@@ -7,6 +7,7 @@
 
 import UIKit
 import CoreData
+import ESPullToRefresh
 
 class ListNoteViewController: UIViewController {
     
@@ -27,10 +28,6 @@ class ListNoteViewController: UIViewController {
         self.navigationController?.isNavigationBarHidden = false
         setupNavigationButton()
         configView()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         getData()
     }
     
@@ -74,6 +71,10 @@ class ListNoteViewController: UIViewController {
             $0.registerNibCellFor(type: SearchTableViewCell.self)
             $0.keyboardDismissMode = .onDrag
             $0.scrollsToTop = false
+            $0.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 60, right: 0)
+            $0.es.addPullToRefresh { [weak self] in
+                self?.getData()
+            }
         }
     }
     
@@ -155,6 +156,8 @@ extension ListNoteViewController: UITableViewDelegate, UITableViewDataSource {
         switch model.type {
         case .item:
             let vc = NoteContentViewController.init(nibName: NoteContentViewController.className, bundle: nil)
+            vc.dataContent = model
+            vc.idFolder = idFolder
             self.navigationController?.pushViewController(vc, animated: true)
         default:
             break
