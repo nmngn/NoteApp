@@ -98,6 +98,7 @@ class HomeController: UIViewController {
         otherTitle.fontStyle = UIFont.systemFont(ofSize: 16, weight: .semibold)
         
         var quickFolder = HomeModel(type: .folder)
+        quickFolder.idFolder = ""
         quickFolder.imageFolder = "quick_folder_icon"
         quickFolder.titleFolder = "Quick Note"
         quickFolder.countNote = 0

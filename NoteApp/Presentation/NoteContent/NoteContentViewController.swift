@@ -10,12 +10,16 @@ import CoreData
 
 class NoteContentViewController: UIViewController {
 
-    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var scrollViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var timeLabel: UILabel!
-    @IBOutlet weak var textView: UITextView!
+    @IBOutlet weak var titleTextView: UITextView!
+    @IBOutlet weak var contentTextView: UITextView!
     
     var idFolder = ""
     var isLock = false
+    
+    var titleNote = ""
+    var contentNote = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,9 +29,22 @@ class NoteContentViewController: UIViewController {
         setupData()
     }
     
+    func setupData() {
+        timeLabel.text = getCurrentDate()
+        titleTextView.delegate = self
+        contentTextView.delegate = self
+        titleTextView.autocorrectionType = .no
+        contentTextView.autocorrectionType = .no
+        contentTextView.isEditable = false
+    }
+    
     func setupRightBarButton() {
-        let rightBarButtonItem = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(doneAction))
+        let rightBarButtonItem = UIBarButtonItem(title: "Done", style: .plain , target: self, action: #selector(doneAction))
         self.navigationItem.rightBarButtonItem = rightBarButtonItem
+    }
+    
+    override func touchBackButton() {
+        self.navigationController?.popViewController(animated: true)
     }
     
     @objc func doneAction() {
@@ -52,15 +69,26 @@ class NoteContentViewController: UIViewController {
             print("Could not save. \(error), \(error.userInfo)")
         }
     }
-    
-    func setupData() {
-        timeLabel.text = getCurrentDate()
-        textView.delegate = self
-    }
 }
 
 extension NoteContentViewController: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
+        self.titleTextView.frame.size.height = self.titleTextView.contentSize.height
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if textView == self.titleTextView && text == "\n" {
+            self.contentTextView.isEditable = true
+            self.contentTextView.becomeFirstResponder()
+            self.scrollViewHeightConstraint.constant += 20
+            return false
+        }
         
+        if textView == self.contentTextView && text == "\n" {
+            self.scrollViewHeightConstraint.constant += 20
+            return true
+        }
+        
+        return true
     }
 }
