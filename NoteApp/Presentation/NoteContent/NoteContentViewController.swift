@@ -20,6 +20,7 @@ class NoteContentViewController: UIViewController {
     
     var titleNote = ""
     var contentNote = ""
+    var lineCount = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,10 +33,12 @@ class NoteContentViewController: UIViewController {
     func setupData() {
         timeLabel.text = getCurrentDate()
         titleTextView.delegate = self
-        contentTextView.delegate = self
         titleTextView.autocorrectionType = .no
+        titleTextView.becomeFirstResponder()
+        contentTextView.delegate = self
         contentTextView.autocorrectionType = .no
         contentTextView.isEditable = false
+        scrollViewHeightConstraint.constant = 0
     }
     
     func setupRightBarButton() {
@@ -44,20 +47,34 @@ class NoteContentViewController: UIViewController {
     }
     
     override func touchBackButton() {
+        saveData()
         self.navigationController?.popViewController(animated: true)
     }
     
     @objc func doneAction() {
-        
+        saveData()
+        self.navigationController?.popViewController(animated: true)
     }
     
-    func saveData(title: String, content: String, isLock: Bool, idNote: String, time: String) {
+    func saveData() {
+        if !titleTextView.text.isEmpty && !contentTextView.text.isEmpty {
+            getDataToSave(title: titleTextView.text, content: contentTextView.text, isLock: isLock, idNote: UUID().uuidString, time: timeLabel.text ?? getCurrentDate())
+        } else {
+            if titleTextView.text.isEmpty {
+                getDataToSave(title: "No title", content: contentTextView.text, isLock: isLock, idNote: UUID().uuidString, time: timeLabel.text ?? getCurrentDate())
+            } else if contentTextView.text.isEmpty {
+                getDataToSave(title: titleTextView.text, content: "No content", isLock: isLock, idNote: UUID().uuidString, time: timeLabel.text ?? getCurrentDate())
+            }
+        }
+    }
+    
+    func getDataToSave(title: String, content: String, isLock: Bool, idNote: String, time: String) {
         let context = getContext()
         let entity = NSEntityDescription.entity(forEntityName: "NoteEntity", in: context)!
         let note = NSManagedObject(entity: entity, insertInto: context)
         
         note.setValue(title, forKey: "title")
-        note.setValue(content, forKey: "description")
+        note.setValue(content, forKey: "detail")
         note.setValue(isLock, forKey: "isLock")
         note.setValue(time, forKey: "dateTime")
         note.setValue(self.idFolder, forKey: "idFolder")
@@ -80,13 +97,17 @@ extension NoteContentViewController: UITextViewDelegate {
         if textView == self.titleTextView && text == "\n" {
             self.contentTextView.isEditable = true
             self.contentTextView.becomeFirstResponder()
-            self.scrollViewHeightConstraint.constant += 20
+            lineCount += 1
             return false
         }
         
         if textView == self.contentTextView && text == "\n" {
-            self.scrollViewHeightConstraint.constant += 20
+            lineCount += 1
             return true
+        }
+        
+        if lineCount > 20 {
+            self.scrollViewHeightConstraint.constant += 8
         }
         
         return true

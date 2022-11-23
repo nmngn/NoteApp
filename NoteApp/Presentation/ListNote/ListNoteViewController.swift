@@ -28,6 +28,11 @@ class ListNoteViewController: UIViewController {
         configView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getData()
+    }
+    
     func getData() {
         dispatchGroup.enter()
         fetchData()
@@ -48,6 +53,7 @@ class ListNoteViewController: UIViewController {
             listNote = try managedContext.fetch(fetchNoteRequest)
 
             for item in listNote {
+                self.model.append(parseToListNote(item: item))
             }
             
         } catch let error as NSError {
@@ -90,18 +96,23 @@ class ListNoteViewController: UIViewController {
     
     @IBAction func addNote(_ sender: UIButton) {
         let vc = NoteContentViewController.init(nibName: NoteContentViewController.className, bundle: nil)
+        vc.idFolder = self.idFolder
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
-//    func parseToListNote(item: NSManagedObject) -> ListNoteModel {
-//        var data: ListNoteModel
-//        return data
-//    }
+    func parseToListNote(item: NSManagedObject) -> ListNoteModel {
+        let isLock = item.value(forKey: "isLock") as? Bool ?? false
+        let title = item.value(forKey: "title") as? String ?? ""
+        let content = item.value(forKey: "detail") as? String ?? ""
+        let date = item.value(forKey: "dateTime") as? String ?? ""
+        let idNote = item.value(forKey: "idNote") as? String ?? ""
+        return ListNoteModel(type: .item, titleNote: title, contentNote: content, isLock: isLock, date: date, idNote: idNote)
+    }
     
     func deleteNote(id: String) {
         let context = getContext()
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "FolderEntity")
-        request.predicate = NSPredicate(format: "idFolder = %@", id)
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "NoteEntity")
+        request.predicate = NSPredicate(format: "idNote = %@", id)
 
         do {
             let result = try context.fetch(request)
@@ -135,6 +146,7 @@ extension ListNoteViewController: UITableViewDelegate, UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "ItemTableViewCell", for: indexPath)
                     as? ItemTableViewCell else { return UITableViewCell() }
             cell.selectionStyle = .none
+            cell.setupData(model: model)
             return cell
         case .search:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "SearchTableViewCell", for: indexPath)
@@ -163,11 +175,11 @@ extension ListNoteViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if (editingStyle == .delete) {
-//            self.tableView.beginUpdates()
-//            self.deleteNote(id: self.model[indexPath.row].idFolder)
-//            self.model.remove(at: indexPath.row)
-//            self.tableView.deleteRows(at: [indexPath], with: .none)
-//            self.tableView.endUpdates()
+            self.tableView.beginUpdates()
+            self.deleteNote(id: self.model[indexPath.row].idNote)
+            self.model.remove(at: indexPath.row)
+            self.tableView.deleteRows(at: [indexPath], with: .none)
+            self.tableView.endUpdates()
         }
     }
 

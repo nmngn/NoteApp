@@ -134,6 +134,7 @@ class HomeController: UIViewController {
     
     @IBAction func addQUickNote(_ sender: UIButton) {
         let vc = NoteContentViewController.init(nibName: NoteContentViewController.className, bundle: nil)
+        vc.idFolder = ""
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -207,6 +208,7 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource {
         switch model.type {
         case .folder:
             let vc = ListNoteViewController.init(nibName: ListNoteViewController.className, bundle: nil)
+            vc.navigationItem.title = model.titleFolder
             vc.idFolder = model.idFolder
             self.navigationController?.pushViewController(vc, animated: true)
         default:

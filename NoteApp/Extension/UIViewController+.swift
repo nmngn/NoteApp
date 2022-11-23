@@ -55,6 +55,5 @@ extension UIViewController {
     
     @objc func touchBackButton() {
         self.navigationController?.popViewController(animated: true)
-        self.dismiss(animated: true, completion: nil)
     }
 }

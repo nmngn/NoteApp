@@ -22,13 +22,22 @@ struct ListNoteModel: DataCellArgument {
     var fontStyle = UIFont()
     
     var isLock = false
-    
-    var titleDescription = ""
-    var description = ""
+    var idNote = ""
+    var titleNote = ""
+    var contentNote = ""
     var date = ""
     
     init(type: ListNoteType) {
         self.type = type
+    }
+    
+    init(type: ListNoteType, titleNote: String, contentNote: String, isLock: Bool, date: String, idNote: String) {
+        self.type = type
+        self.titleNote = titleNote
+        self.contentNote = contentNote
+        self.isLock = isLock
+        self.date = date
+        self.idNote = idNote
     }
     
     func getTitle() -> String {
