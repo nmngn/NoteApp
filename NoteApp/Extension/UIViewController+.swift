@@ -56,4 +56,20 @@ extension UIViewController {
     @objc func touchBackButton() {
         self.navigationController?.popViewController(animated: true)
     }
+    
+    func parseToHomeModel(item: NSManagedObject) -> HomeModel {
+        let id = item.value(forKey: "idFolder") as? String ?? ""
+        let text = item.value(forKey: "title") as? String ?? ""
+        let data = HomeModel(type: .folder, titleFolder: text, id: id)
+        return data
+    }
+    
+    func parseToListNote(item: NSManagedObject) -> ListNoteModel {
+        let isLock = item.value(forKey: "isLock") as? Bool ?? false
+        let title = item.value(forKey: "title") as? String ?? ""
+        let content = item.value(forKey: "detail") as? String ?? ""
+        let date = item.value(forKey: "dateTime") as? String ?? ""
+        let idNote = item.value(forKey: "idNote") as? String ?? ""
+        return ListNoteModel(type: .item, titleNote: title, contentNote: content, isLock: isLock, date: date, idNote: idNote)
+    }
 }

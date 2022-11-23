@@ -59,12 +59,10 @@ class NoteContentViewController: UIViewController {
     func saveData() {
         if !titleTextView.text.isEmpty && !contentTextView.text.isEmpty {
             getDataToSave(title: titleTextView.text, content: contentTextView.text, isLock: isLock, idNote: UUID().uuidString, time: timeLabel.text ?? getCurrentDate())
-        } else {
-            if titleTextView.text.isEmpty {
-                getDataToSave(title: "No title", content: contentTextView.text, isLock: isLock, idNote: UUID().uuidString, time: timeLabel.text ?? getCurrentDate())
-            } else if contentTextView.text.isEmpty {
-                getDataToSave(title: titleTextView.text, content: "No content", isLock: isLock, idNote: UUID().uuidString, time: timeLabel.text ?? getCurrentDate())
-            }
+        } else if titleTextView.text.isEmpty && !contentTextView.text.isEmpty {
+            getDataToSave(title: "No title", content: contentTextView.text, isLock: isLock, idNote: UUID().uuidString, time: timeLabel.text ?? getCurrentDate())
+        } else if !titleTextView.text.isEmpty && contentTextView.text.isEmpty {
+            getDataToSave(title: titleTextView.text, content: "No content", isLock: isLock, idNote: UUID().uuidString, time: timeLabel.text ?? getCurrentDate())
         }
     }
     

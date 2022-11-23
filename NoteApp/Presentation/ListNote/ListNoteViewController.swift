@@ -11,6 +11,7 @@ import CoreData
 class ListNoteViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var noteCountLabel: UILabel!
     
     var idFolder = ""
     var model = [ListNoteModel]()
@@ -55,7 +56,7 @@ class ListNoteViewController: UIViewController {
             for item in listNote {
                 self.model.append(parseToListNote(item: item))
             }
-            
+            self.noteCountLabel.text = "\(listNote.count) Notes"
         } catch let error as NSError {
             print("Could not fetch. \(error), \(error.userInfo)")
         }
@@ -98,15 +99,6 @@ class ListNoteViewController: UIViewController {
         let vc = NoteContentViewController.init(nibName: NoteContentViewController.className, bundle: nil)
         vc.idFolder = self.idFolder
         self.navigationController?.pushViewController(vc, animated: true)
-    }
-    
-    func parseToListNote(item: NSManagedObject) -> ListNoteModel {
-        let isLock = item.value(forKey: "isLock") as? Bool ?? false
-        let title = item.value(forKey: "title") as? String ?? ""
-        let content = item.value(forKey: "detail") as? String ?? ""
-        let date = item.value(forKey: "dateTime") as? String ?? ""
-        let idNote = item.value(forKey: "idNote") as? String ?? ""
-        return ListNoteModel(type: .item, titleNote: title, contentNote: content, isLock: isLock, date: date, idNote: idNote)
     }
     
     func deleteNote(id: String) {

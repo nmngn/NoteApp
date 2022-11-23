@@ -22,5 +22,4 @@ class FolderTableViewCell: UITableViewCell {
         titleFolder.text = data.titleFolder
         countLabel.text = "\(data.countNote)"
     }
-    
 }

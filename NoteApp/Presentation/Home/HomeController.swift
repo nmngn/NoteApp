@@ -16,12 +16,12 @@ class HomeController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var model = [HomeModel]()
-    var listFolder: [NSManagedObject] = [] {
+    var listFolder: [NSManagedObject] = []
+    var listNote: [NSManagedObject] = [] {
         didSet {
             setupData()
         }
     }
-    var listNote: [NSManagedObject] = []
     var dispatchGroup = DispatchGroup()
     
     override func viewDidLoad() {
@@ -51,9 +51,11 @@ class HomeController: UIViewController {
             listNote = try managedContext.fetch(fetchNoteRequest)
             
             for item in listFolder {
-                self.model.append(parseToHomeModel(item: item))
+                var folder = parseToHomeModel(item: item)
+                let noteCount = listNote.filter({$0.value(forKey: "idFolder") as! String == item.value(forKey: "idFolder") as! String})
+                folder.countNote = noteCount.count
+                self.model.append(folder)
             }
-            
         } catch let error as NSError {
             print("Could not fetch. \(error), \(error.userInfo)")
         }
@@ -77,14 +79,6 @@ class HomeController: UIViewController {
         }
     }
     
-    func parseToHomeModel(item: NSManagedObject) -> HomeModel {
-        let id = item.value(forKey: "idFolder") as? String ?? ""
-        let text = item.value(forKey: "title") as? String ?? ""
-        let data = HomeModel(type: .folder, titleFolder: text, id: id)
-        return data
-    }
-    
-    
     func setupData() {
         self.model.removeAll()
         var title = HomeModel(type: .title)
@@ -101,7 +95,7 @@ class HomeController: UIViewController {
         quickFolder.idFolder = ""
         quickFolder.imageFolder = "quick_folder_icon"
         quickFolder.titleFolder = "Quick Note"
-        quickFolder.countNote = 0
+        quickFolder.countNote = listNote.filter({$0.value(forKey: "idFolder") as! String == ""}).count
         
         self.model.append(title)
         self.model.append(search)
