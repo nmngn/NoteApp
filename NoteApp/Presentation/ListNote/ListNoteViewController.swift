@@ -7,12 +7,13 @@
 
 import UIKit
 import CoreData
-import ESPullToRefresh
 
 class ListNoteViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var noteCountLabel: UILabel!
+    
+    var pullControl = UIRefreshControl()
     
     var idFolder = ""
     var model = [ListNoteModel]()
@@ -57,10 +58,12 @@ class ListNoteViewController: UIViewController {
         } catch let error as NSError {
             print("Could not fetch. \(error), \(error.userInfo)")
         }
-        self.tableView.es.stopPullToRefresh()
+        self.pullControl.endRefreshing()
     }
     
     func configView() {
+        pullControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        pullControl.addTarget(self, action: #selector(self.refresh), for: .valueChanged)
         tableView.do {
             $0.delegate = self
             $0.dataSource = self
@@ -70,12 +73,14 @@ class ListNoteViewController: UIViewController {
             $0.registerNibCellFor(type: ItemTableViewCell.self)
             $0.registerNibCellFor(type: SearchTableViewCell.self)
             $0.keyboardDismissMode = .onDrag
-            $0.scrollsToTop = false
+            $0.scrollsToTop = true
             $0.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 60, right: 0)
-            $0.es.addPullToRefresh { [weak self] in
-                self?.getData()
-            }
+            $0.addSubview(pullControl)
         }
+    }
+    
+    @objc func refresh() {
+        self.getData()
     }
     
     func setupData() {

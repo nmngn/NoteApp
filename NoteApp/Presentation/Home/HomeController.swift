@@ -72,7 +72,7 @@ class HomeController: UIViewController {
             $0.registerNibCellFor(type: FolderTableViewCell.self)
             $0.registerNibCellFor(type: SearchTableViewCell.self)
             $0.keyboardDismissMode = .onDrag
-            $0.scrollsToTop = false
+            $0.scrollsToTop = true
             $0.es.addPullToRefresh { [weak self] in
                 self?.getData()
             }

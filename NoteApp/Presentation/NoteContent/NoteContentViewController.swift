@@ -48,8 +48,16 @@ class NoteContentViewController: UIViewController {
     func setupData() {
         if let data = self.dataContent {
             timeLabel.text = data.date
-            titleTextView.text = data.titleNote
-            contentTextView.text = data.contentNote
+            if data.titleNote == "No title" {
+                titleTextView.text = ""
+            } else {
+                titleTextView.text = data.titleNote
+            }
+            if data.contentNote == "No content" {
+                contentTextView.text = ""
+            } else {
+                contentTextView.text = data.contentNote
+            }
             isLock = data.isLock
             idNote = data.idNote
             
@@ -93,17 +101,19 @@ class NoteContentViewController: UIViewController {
     
     func getDataToSave(title: String, content: String, isLock: Bool, idNote: String, time: String) {
         let context = getContext()
-        let entity = NSEntityDescription.entity(forEntityName: "NoteEntity", in: context)!
-        let note = NSManagedObject(entity: entity, insertInto: context)
         
-        note.setValue(title, forKey: "title")
-        note.setValue(content, forKey: "detail")
-        note.setValue(isLock, forKey: "isLock")
-        note.setValue(time, forKey: "dateTime")
-        note.setValue(self.idFolder, forKey: "idFolder")
-        note.setValue(UUID().uuidString, forKey: "idNote")
-        
+        let fetchRequest : NSFetchRequest<NoteEntity> = NoteEntity.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "idNote == %@", idNote)
         do {
+            let results = try context.fetch(fetchRequest)
+            if let note = results.first {
+                note.title = title
+                note.idNote = idNote
+                note.isLock = isLock
+                note.dateTime = time
+                note.detail = content
+                note.idFolder = self.idFolder
+            }
             try context.save()
         } catch let error as NSError {
             print("Could not save. \(error), \(error.userInfo)")
