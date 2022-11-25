@@ -116,8 +116,8 @@ class NoteContentViewController: UIViewController {
                 context.delete(object as! NSManagedObject)
             }
             try context.save()
-            Session.shared.popToRoot = true
-            Session.shared.popToList = true
+            Session.shared.reloadInRoot = true
+            Session.shared.reloadInList = true
         } catch let error as NSError {
             print("Could not delete. \(error), \(error.userInfo)")
         }
@@ -140,7 +140,7 @@ class NoteContentViewController: UIViewController {
                     note.idFolder = self.idFolder
                 }
                 try context.save()
-                Session.shared.popToRoot = true
+                Session.shared.reloadInRoot = true
             } catch let error as NSError {
                 print("Could not save. \(error), \(error.userInfo)")
             }
@@ -157,7 +157,7 @@ class NoteContentViewController: UIViewController {
             
             do {
                 try context.save()
-                Session.shared.popToRoot = true
+                Session.shared.reloadInRoot = true
             } catch let error as NSError {
                 print("Could not save. \(error), \(error.userInfo)")
             }
@@ -168,7 +168,7 @@ class NoteContentViewController: UIViewController {
 extension NoteContentViewController: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
         self.titleTextView.frame.size.height = self.titleTextView.contentSize.height
-        Session.shared.popToList = true
+        Session.shared.reloadInList = true
     }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {

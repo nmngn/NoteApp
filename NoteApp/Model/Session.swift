@@ -10,6 +10,6 @@ import Foundation
 class Session {
     static let shared = Session()
     
-    var popToList = false
-    var popToRoot = false
+    var reloadInList = false
+    var reloadInRoot = false
 }

@@ -15,6 +15,7 @@ class ListNoteViewController: UIViewController {
     
     var pullControl = UIRefreshControl()
     
+    var titleFolder = ""
     var idFolder = ""
     var model = [ListNoteModel]()
     var listNote: [NSManagedObject] = [] {
@@ -34,9 +35,10 @@ class ListNoteViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.prefersLargeTitles = true
-        if Session.shared.popToList {
+        self.title = titleFolder
+        if Session.shared.reloadInList {
             getData()
-            Session.shared.popToList = false
+            Session.shared.reloadInList = false
         }
     }
     
@@ -108,6 +110,7 @@ class ListNoteViewController: UIViewController {
     @IBAction func addNote(_ sender: UIButton) {
         let vc = NoteContentViewController.init(nibName: NoteContentViewController.className, bundle: nil)
         vc.idFolder = self.idFolder
+        self.title = ""
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -122,7 +125,7 @@ class ListNoteViewController: UIViewController {
                 context.delete(object as! NSManagedObject)
             }
             try context.save()
-            Session.shared.popToRoot = true
+            Session.shared.reloadInRoot = true
         } catch let error as NSError {
             print("Could not delete. \(error), \(error.userInfo)")
         }
@@ -168,6 +171,7 @@ extension ListNoteViewController: UITableViewDelegate, UITableViewDataSource {
             let vc = NoteContentViewController.init(nibName: NoteContentViewController.className, bundle: nil)
             vc.dataContent = model
             vc.idFolder = idFolder
+            self.title = ""
             self.navigationController?.pushViewController(vc, animated: true)
         default:
             break

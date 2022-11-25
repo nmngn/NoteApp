@@ -34,9 +34,9 @@ class HomeController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.prefersLargeTitles = true
-        if Session.shared.popToRoot {
+        if Session.shared.reloadInRoot {
             getData()
-            Session.shared.popToRoot = false
+            Session.shared.reloadInRoot = false
         }
     }
     
@@ -208,7 +208,7 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource {
         switch model.type {
         case .folder:
             let vc = ListNoteViewController.init(nibName: ListNoteViewController.className, bundle: nil)
-            vc.navigationItem.title = model.titleFolder
+            vc.titleFolder = model.titleFolder
             vc.idFolder = model.idFolder
             self.navigationController?.pushViewController(vc, animated: true)
         default:
