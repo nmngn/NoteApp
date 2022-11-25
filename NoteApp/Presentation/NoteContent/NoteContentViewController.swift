@@ -84,17 +84,17 @@ class NoteContentViewController: UIViewController {
         if !titleTextView.text.isEmpty && !contentTextView.text.isEmpty {
             getDataToSave(title: titleTextView.text, content: contentTextView.text
                           , isLock: isLock
-                          , idNote: !self.idNote.isEmpty ? self.idNote : UUID().uuidString
+                          , idNote: self.idNote
                           , time: timeLabel.text ?? getCurrentDate())
         } else if titleTextView.text.isEmpty && !contentTextView.text.isEmpty {
             getDataToSave(title: "No title", content: contentTextView.text
                           , isLock: isLock
-                          , idNote: !self.idNote.isEmpty ? self.idNote : UUID().uuidString
+                          , idNote: self.idNote
                           , time: timeLabel.text ?? getCurrentDate())
         } else if !titleTextView.text.isEmpty && contentTextView.text.isEmpty {
             getDataToSave(title: titleTextView.text, content: "No content"
                           , isLock: isLock
-                          , idNote: !self.idNote.isEmpty ? self.idNote : UUID().uuidString
+                          , idNote: self.idNote
                           , time: timeLabel.text ?? getCurrentDate())
         }
     }
@@ -102,21 +102,41 @@ class NoteContentViewController: UIViewController {
     func getDataToSave(title: String, content: String, isLock: Bool, idNote: String, time: String) {
         let context = getContext()
         
-        let fetchRequest : NSFetchRequest<NoteEntity> = NoteEntity.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "idNote == %@", idNote)
-        do {
-            let results = try context.fetch(fetchRequest)
-            if let note = results.first {
-                note.title = title
-                note.idNote = idNote
-                note.isLock = isLock
-                note.dateTime = time
-                note.detail = content
-                note.idFolder = self.idFolder
+        if idNote != "" {
+            let fetchRequest : NSFetchRequest<NoteEntity> = NoteEntity.fetchRequest()
+            fetchRequest.predicate = NSPredicate(format: "idNote == %@", idNote)
+            do {
+                let results = try context.fetch(fetchRequest)
+                if let note = results.first {
+                    note.title = title
+                    note.idNote = idNote
+                    note.isLock = isLock
+                    note.dateTime = time
+                    note.detail = content
+                    note.idFolder = self.idFolder
+                }
+                try context.save()
+                Session.shared.popToRoot = true
+            } catch let error as NSError {
+                print("Could not save. \(error), \(error.userInfo)")
             }
-            try context.save()
-        } catch let error as NSError {
-            print("Could not save. \(error), \(error.userInfo)")
+        } else {
+            let entity = NSEntityDescription.entity(forEntityName: "NoteEntity", in: context)!
+            let note = NSManagedObject(entity: entity, insertInto: context)
+            
+            note.setValue(title, forKey: "title")
+            note.setValue(content, forKey: "detail")
+            note.setValue(isLock, forKey: "isLock")
+            note.setValue(time, forKey: "dateTime")
+            note.setValue(self.idFolder, forKey: "idFolder")
+            note.setValue(UUID().uuidString, forKey: "idNote")
+            
+            do {
+                try context.save()
+                Session.shared.popToRoot = true
+            } catch let error as NSError {
+                print("Could not save. \(error), \(error.userInfo)")
+            }
         }
     }
 }
@@ -124,6 +144,7 @@ class NoteContentViewController: UIViewController {
 extension NoteContentViewController: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
         self.titleTextView.frame.size.height = self.titleTextView.contentSize.height
+        Session.shared.popToList = true
     }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {

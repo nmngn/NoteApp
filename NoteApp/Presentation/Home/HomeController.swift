@@ -30,6 +30,14 @@ class HomeController: UIViewController {
         getData()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if Session.shared.popToRoot {
+            getData()
+            Session.shared.popToRoot = false
+        }
+    }
+    
     func getData() {
         dispatchGroup.enter()
         fetchData()

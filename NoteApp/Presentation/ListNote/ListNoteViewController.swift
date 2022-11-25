@@ -32,6 +32,14 @@ class ListNoteViewController: UIViewController {
         getData()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if Session.shared.popToList {
+            getData()
+            Session.shared.popToList = false
+        }
+    }
+    
     func getData() {
         dispatchGroup.enter()
         fetchData()
@@ -118,6 +126,7 @@ class ListNoteViewController: UIViewController {
                 context.delete(object as! NSManagedObject)
             }
             try context.save()
+            Session.shared.popToRoot = true
         } catch let error as NSError {
             print("Could not delete. \(error), \(error.userInfo)")
         }
