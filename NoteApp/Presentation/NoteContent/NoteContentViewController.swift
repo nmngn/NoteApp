@@ -28,10 +28,14 @@ class NoteContentViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationButton()
-        self.navigationController?.isNavigationBarHidden = false
         setupRightBarButton()
         configComponent()
         setupData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.prefersLargeTitles = false
     }
     
     func configComponent() {
@@ -96,6 +100,26 @@ class NoteContentViewController: UIViewController {
                           , isLock: isLock
                           , idNote: self.idNote
                           , time: timeLabel.text ?? getCurrentDate())
+        } else if titleTextView.text.isEmpty && contentTextView.text.isEmpty && !self.idNote.isEmpty {
+            deleteNote()
+        }
+    }
+    
+    func deleteNote() {
+        let context = getContext()
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "NoteEntity")
+        request.predicate = NSPredicate(format: "idNote = %@", idNote)
+
+        do {
+            let result = try context.fetch(request)
+            for object in result {
+                context.delete(object as! NSManagedObject)
+            }
+            try context.save()
+            Session.shared.popToRoot = true
+            Session.shared.popToList = true
+        } catch let error as NSError {
+            print("Could not delete. \(error), \(error.userInfo)")
         }
     }
     

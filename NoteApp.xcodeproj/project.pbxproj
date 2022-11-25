@@ -23,6 +23,8 @@
 		D80FA5352924D10400D0B9ED /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80FA52E2924D10400D0B9ED /* UITextField+.swift */; };
 		D80FA5362924D10400D0B9ED /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80FA52F2924D10400D0B9ED /* Date+.swift */; };
 		D8B2CB5D29306D500008F5C4 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B2CB5C29306D500008F5C4 /* Session.swift */; };
+		D8B2CB612930A8970008F5C4 /* LockNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B2CB5F2930A8970008F5C4 /* LockNoteViewController.swift */; };
+		D8B2CB622930A8970008F5C4 /* LockNoteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8B2CB602930A8970008F5C4 /* LockNoteViewController.xib */; };
 		D8C336B92921E8460008527A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C336B82921E8460008527A /* AppDelegate.swift */; };
 		D8C336C02921E8460008527A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D8C336BE2921E8460008527A /* Main.storyboard */; };
 		D8C336C32921E8460008527A /* NoteApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D8C336C12921E8460008527A /* NoteApp.xcdatamodeld */; };
@@ -61,6 +63,8 @@
 		D80FA52E2924D10400D0B9ED /* UITextField+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
 		D80FA52F2924D10400D0B9ED /* Date+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
 		D8B2CB5C29306D500008F5C4 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
+		D8B2CB5F2930A8970008F5C4 /* LockNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockNoteViewController.swift; sourceTree = "<group>"; };
+		D8B2CB602930A8970008F5C4 /* LockNoteViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LockNoteViewController.xib; sourceTree = "<group>"; };
 		D8C336B52921E8460008527A /* NoteApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NoteApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8C336B82921E8460008527A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D8C336BF2921E8460008527A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -138,6 +142,15 @@
 				D80FA52A2924D10400D0B9ED /* UIViewController+.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		D8B2CB5E2930A87F0008F5C4 /* LockNote */ = {
+			isa = PBXGroup;
+			children = (
+				D8B2CB5F2930A8970008F5C4 /* LockNoteViewController.swift */,
+				D8B2CB602930A8970008F5C4 /* LockNoteViewController.xib */,
+			);
+			path = LockNote;
 			sourceTree = "<group>";
 		};
 		D8C336AC2921E8460008527A = {
@@ -253,6 +266,7 @@
 		D8F6C6CC292B638200EF1A5F /* NoteContent */ = {
 			isa = PBXGroup;
 			children = (
+				D8B2CB5E2930A87F0008F5C4 /* LockNote */,
 				D8F6C6CD292B639500EF1A5F /* NoteContentViewController.swift */,
 				D8F6C6CE292B639500EF1A5F /* NoteContentViewController.xib */,
 			);
@@ -338,6 +352,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D8B2CB622930A8970008F5C4 /* LockNoteViewController.xib in Resources */,
 				D80FA51A2924902B00D0B9ED /* TitleTableViewCell.xib in Resources */,
 				D80FA522292490F600D0B9ED /* FolderTableViewCell.xib in Resources */,
 				D8F6C6D0292B639500EF1A5F /* NoteContentViewController.xib in Resources */,
@@ -421,6 +436,7 @@
 				D8B2CB5D29306D500008F5C4 /* Session.swift in Sources */,
 				D8F6C6C2292B204F00EF1A5F /* ListNoteViewController.swift in Sources */,
 				D80FA5192924902B00D0B9ED /* TitleTableViewCell.swift in Sources */,
+				D8B2CB612930A8970008F5C4 /* LockNoteViewController.swift in Sources */,
 				D8C336DA2921FE7D0008527A /* HomeController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

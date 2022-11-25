@@ -28,10 +28,12 @@ class HomeController: UIViewController {
         super.viewDidLoad()
         configView()
         getData()
+        self.title = "Folders"
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.prefersLargeTitles = true
         if Session.shared.popToRoot {
             getData()
             Session.shared.popToRoot = false
@@ -89,10 +91,7 @@ class HomeController: UIViewController {
     
     func setupData() {
         self.model.removeAll()
-        var title = HomeModel(type: .title)
-        title.title = "Folders"
-        title.fontStyle = UIFont.boldSystemFont(ofSize: 18)
-        
+    
         let search = HomeModel(type: .search)
         
         var otherTitle = HomeModel(type: .title)
@@ -105,7 +104,6 @@ class HomeController: UIViewController {
         quickFolder.titleFolder = "Quick Note"
         quickFolder.countNote = listNote.filter({$0.value(forKey: "idFolder") as! String == ""}).count
         
-        self.model.append(title)
         self.model.append(search)
         self.model.append(quickFolder)
         self.model.append(otherTitle)

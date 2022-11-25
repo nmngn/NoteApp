@@ -26,7 +26,6 @@ class ListNoteViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.isNavigationBarHidden = false
         setupNavigationButton()
         configView()
         getData()
@@ -34,6 +33,7 @@ class ListNoteViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.prefersLargeTitles = true
         if Session.shared.popToList {
             getData()
             Session.shared.popToList = false
@@ -93,13 +93,9 @@ class ListNoteViewController: UIViewController {
     
     func setupData() {
         self.model.removeAll()
-        var title = ListNoteModel(type: .title)
-        title.title = "Notes"
-        title.fontStyle = UIFont.boldSystemFont(ofSize: 18)
         
         let search = ListNoteModel(type: .search)
         
-        self.model.append(title)
         self.model.append(search)
 
         self.tableView.reloadData()
