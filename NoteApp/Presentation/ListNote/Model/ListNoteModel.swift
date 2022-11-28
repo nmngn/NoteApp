@@ -9,17 +9,13 @@ import Foundation
 import UIKit
 
 enum ListNoteType {
-    case title
     case search
     case item
 }
 
 
-struct ListNoteModel: DataCellArgument {
+struct ListNoteModel {
     var type : ListNoteType
-    
-    var title = ""
-    var fontStyle = UIFont()
     
     var isLock = false
     var idNote = ""
@@ -39,12 +35,5 @@ struct ListNoteModel: DataCellArgument {
         self.date = date
         self.idNote = idNote
     }
-    
-    func getTitle() -> String {
-        return title
-    }
-    
-    func getFont() -> UIFont {
-        return fontStyle
-    }
+
 }

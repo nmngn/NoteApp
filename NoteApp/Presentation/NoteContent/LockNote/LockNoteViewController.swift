@@ -11,19 +11,24 @@ class LockNoteViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        setupNavigationButton()
     }
 
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @IBAction func unlockAction(_ sender: UIButton) {
+        var textField = UITextField()
+        let alertController = UIAlertController(title: "View Note", message: "To view locked note, enter the note password", preferredStyle: .alert)
+        let createAction = UIAlertAction(title: "Ok", style: .default) { [weak self] _ in
+            if let text = textField.text, !text.isEmpty {
+                print(text)
+            }
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alertController.addTextField { alertTextField in
+            alertTextField.placeholder = "Password"
+            textField = alertTextField
+        }
+        alertController.addAction(createAction)
+        alertController.addAction(cancelAction)
+        present(alertController, animated: true, completion: nil)
     }
-    */
-
 }

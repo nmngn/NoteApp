@@ -45,9 +45,19 @@ extension UIViewController {
     func setupNavigationButton() {
         self.navigationItem.setHidesBackButton(true, animated: true)
         if #available(iOS 13.0, *) {
-            let backItem = UIBarButtonItem(image:  UIImage(named: "ic_left_arrow")?.withTintColor(.black, renderingMode: .alwaysOriginal)
-                                           , style: .plain, target: self, action: #selector(touchBackButton))
-            navigationItem.leftBarButtonItems = [backItem]
+            let button =  UIButton(type: .custom)
+            button.setImage(UIImage(named: "ic_left_arrow")?.withRenderingMode(.alwaysOriginal), for: .normal)
+            button.addTarget(self, action: #selector(touchBackButton), for: .touchUpInside)
+            button.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+            let label = UILabel(frame: CGRect(x: button.frame.maxX + 2, y: (button.frame.height - 20) / 2, width: 40, height: 20))
+            label.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+            label.text = "Back"
+            label.textAlignment = .center
+            label.textColor = .black
+            label.backgroundColor =  .clear
+            button.addSubview(label)
+            let barButton = UIBarButtonItem(customView: button)
+            navigationItem.leftBarButtonItem = barButton
         } else {
             // Fallback on earlier versions
         }

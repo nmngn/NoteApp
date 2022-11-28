@@ -142,12 +142,6 @@ extension ListNoteViewController: UITableViewDelegate, UITableViewDataSource {
         model = modelIndexPath(index: indexPath)
         
         switch model.type {
-        case .title:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "TitleTableViewCell", for: indexPath)
-                    as? TitleTableViewCell else { return UITableViewCell() }
-            cell.selectionStyle = .none
-            cell.setupData(data: model)
-            return cell
         case .item:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "ItemTableViewCell", for: indexPath)
                     as? ItemTableViewCell else { return UITableViewCell() }
@@ -172,6 +166,9 @@ extension ListNoteViewController: UITableViewDelegate, UITableViewDataSource {
             vc.dataContent = model
             vc.idFolder = idFolder
             self.title = ""
+            self.navigationController?.pushViewController(vc, animated: true)
+        case .search:
+            let vc = LockNoteViewController.init(nibName: LockNoteViewController.className, bundle: nil)
             self.navigationController?.pushViewController(vc, animated: true)
         default:
             break
