@@ -28,12 +28,12 @@ class HomeController: UIViewController {
         super.viewDidLoad()
         configView()
         getData()
-        self.title = "Folders"
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.prefersLargeTitles = true
+        self.title = "Folders"
         if Session.shared.reloadInRoot {
             getData()
             Session.shared.reloadInRoot = false
@@ -197,6 +197,11 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "SearchTableViewCell", for: indexPath)
                     as? SearchTableViewCell else { return UITableViewCell() }
             cell.selectionStyle = .none
+            cell.openSearch = {[ weak self] in
+                let vc = SearchViewController.init(nibName: SearchViewController.className, bundle: nil)
+                self?.title = ""
+                self?.navigationController?.pushViewController(vc, animated: true)
+            }
             return cell
         }
     }

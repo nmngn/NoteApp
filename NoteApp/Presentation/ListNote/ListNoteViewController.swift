@@ -152,6 +152,11 @@ extension ListNoteViewController: UITableViewDelegate, UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "SearchTableViewCell", for: indexPath)
                     as? SearchTableViewCell else { return UITableViewCell() }
             cell.selectionStyle = .none
+            cell.openSearch = {[ weak self] in
+                let vc = SearchViewController.init(nibName: SearchViewController.className, bundle: nil)
+                self?.title = ""
+                self?.navigationController?.pushViewController(vc, animated: true)
+            }
             return cell
         }
     }
