@@ -61,6 +61,12 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         cell.setupData(model: self.model[indexPath.row])
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = NoteContentViewController.init(nibName: NoteContentViewController.className, bundle: nil)
+        vc.dataContent = model[indexPath.row]
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
 }
 
 extension SearchViewController: UISearchBarDelegate {

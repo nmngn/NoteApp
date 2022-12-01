@@ -218,7 +218,6 @@ extension ListNoteViewController: UITableViewDelegate, UITableViewDataSource {
         case .item:
             let vc = NoteContentViewController.init(nibName: NoteContentViewController.className, bundle: nil)
             vc.dataContent = model
-            vc.idFolder = idFolder
             self.title = ""
             self.navigationController?.pushViewController(vc, animated: true)
         case .search:

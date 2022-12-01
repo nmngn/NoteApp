@@ -71,6 +71,7 @@ class NoteContentViewController: UIViewController {
             isLock = data.isLock
             idNote = data.idNote
             isPin = data.isPin
+            idFolder = data.idFolder
             
             contentTextView.isEditable = true
         }

@@ -81,6 +81,7 @@ extension UIViewController {
         let date = item.value(forKey: "dateTime") as? String ?? ""
         let idNote = item.value(forKey: "idNote") as? String ?? ""
         let isPin = item.value(forKey: "isPin") as? Bool ?? false
-        return ListNoteModel(type: .item, titleNote: title, contentNote: content, isLock: isLock, date: date, idNote: idNote, isPin: isPin)
+        let idFolder = item.value(forKey: "idFolder") as? String ?? ""
+        return ListNoteModel(type: .item, titleNote: title, contentNote: content, isLock: isLock, date: date, idNote: idNote, isPin: isPin, idFolder: idFolder)
     }
 }

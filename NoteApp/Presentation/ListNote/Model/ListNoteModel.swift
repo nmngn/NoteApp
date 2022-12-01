@@ -21,6 +21,7 @@ struct ListNoteModel: DataCellArgument {
     var title = ""
     var fontTitle = UIFont()
     
+    var idFolder = ""
     var isLock = false
     var idNote = ""
     var titleNote = ""
@@ -32,7 +33,7 @@ struct ListNoteModel: DataCellArgument {
         self.type = type
     }
     
-    init(type: ListNoteType, titleNote: String, contentNote: String, isLock: Bool, date: String, idNote: String, isPin: Bool) {
+    init(type: ListNoteType, titleNote: String, contentNote: String, isLock: Bool, date: String, idNote: String, isPin: Bool, idFolder: String) {
         self.type = type
         self.titleNote = titleNote
         self.contentNote = contentNote
@@ -40,6 +41,7 @@ struct ListNoteModel: DataCellArgument {
         self.date = date
         self.idNote = idNote
         self.isPin = isPin
+        self.idFolder = idFolder
     }
 
     func getTitle() -> String {
