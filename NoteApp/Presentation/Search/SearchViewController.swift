@@ -64,25 +64,24 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension SearchViewController: UISearchBarDelegate {
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        self.model.removeAll()
-        if let text = searchBar.text {
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if !searchText.isEmpty {
             let context = getContext()
             let request = NSFetchRequest<NSManagedObject>(entityName: "NoteEntity")
-            request.predicate = NSPredicate(format: "title CONTAINS[cd] %@", text)
+            request.predicate = NSPredicate(format: "title CONTAINS[cd] %@", searchText)
             
             do {
                 let result = try context.fetch(request)
                 for object in result {
                     self.model.append(parseToListNote(item: object))
                 }
-                self.tableView.reloadData()
             } catch let error as NSError {
                 print("Could not delete. \(error), \(error.userInfo)")
             }
-            
         } else {
-            
+            self.model.removeAll()
         }
+        self.tableView.reloadData()
     }
 }

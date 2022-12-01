@@ -199,6 +199,7 @@
 		D8C336D22921ED4E0008527A /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				D8E464B62934B90600275DF2 /* Manipulation */,
 				D8E464B12934678700275DF2 /* Search */,
 				D8F6C6CC292B638200EF1A5F /* NoteContent */,
 				D8F6C6BF292B1DCA00EF1A5F /* ListNote */,
@@ -247,6 +248,13 @@
 				D8E464B32934679500275DF2 /* SearchViewController.xib */,
 			);
 			path = Search;
+			sourceTree = "<group>";
+		};
+		D8E464B62934B90600275DF2 /* Manipulation */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Manipulation;
 			sourceTree = "<group>";
 		};
 		D8F6C6BF292B1DCA00EF1A5F /* ListNote */ = {
