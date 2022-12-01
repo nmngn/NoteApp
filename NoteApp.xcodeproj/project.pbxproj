@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		218133CE0BAB129F8591D057 /* Pods_NoteApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82CAA844755A9849F41104EC /* Pods_NoteApp.framework */; };
+		367E7F472937AC7D009960F0 /* SettingNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367E7F452937AC7D009960F0 /* SettingNoteViewController.swift */; };
+		367E7F482937AC7D009960F0 /* SettingNoteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 367E7F462937AC7D009960F0 /* SettingNoteViewController.xib */; };
 		D80FA51529239BB000D0B9ED /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80FA51429239BB000D0B9ED /* HomeModel.swift */; };
 		D80FA5192924902B00D0B9ED /* TitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80FA5172924902B00D0B9ED /* TitleTableViewCell.swift */; };
 		D80FA51A2924902B00D0B9ED /* TitleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D80FA5182924902B00D0B9ED /* TitleTableViewCell.xib */; };
@@ -32,8 +34,6 @@
 		D8C336C82921E8470008527A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D8C336C62921E8470008527A /* LaunchScreen.storyboard */; };
 		D8C336DA2921FE7D0008527A /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C336D92921FE7D0008527A /* HomeController.swift */; };
 		D8C336DC2921FFE70008527A /* Color.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D8C336DB2921FFE70008527A /* Color.xcassets */; };
-		D8C336DE292200CE0008527A /* FolderEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C336DD292200CE0008527A /* FolderEntity.swift */; };
-		D8C336E02922010D0008527A /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C336DF2922010D0008527A /* CoreDataManager.swift */; };
 		D8E464B42934679500275DF2 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E464B22934679500275DF2 /* SearchViewController.swift */; };
 		D8E464B52934679500275DF2 /* SearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8E464B32934679500275DF2 /* SearchViewController.xib */; };
 		D8F6C6C2292B204F00EF1A5F /* ListNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F6C6C0292B204F00EF1A5F /* ListNoteViewController.swift */; };
@@ -48,6 +48,8 @@
 
 /* Begin PBXFileReference section */
 		052467612AB716AA8E99F55F /* Pods-NoteApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoteApp.release.xcconfig"; path = "Target Support Files/Pods-NoteApp/Pods-NoteApp.release.xcconfig"; sourceTree = "<group>"; };
+		367E7F452937AC7D009960F0 /* SettingNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingNoteViewController.swift; sourceTree = "<group>"; };
+		367E7F462937AC7D009960F0 /* SettingNoteViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingNoteViewController.xib; sourceTree = "<group>"; };
 		82CAA844755A9849F41104EC /* Pods_NoteApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NoteApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2173153BA163A8E51520CA7 /* Pods-NoteApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoteApp.debug.xcconfig"; path = "Target Support Files/Pods-NoteApp/Pods-NoteApp.debug.xcconfig"; sourceTree = "<group>"; };
 		D80FA51429239BB000D0B9ED /* HomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModel.swift; sourceTree = "<group>"; };
@@ -76,8 +78,6 @@
 		D8C336C92921E8470008527A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D8C336D92921FE7D0008527A /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
 		D8C336DB2921FFE70008527A /* Color.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Color.xcassets; sourceTree = "<group>"; };
-		D8C336DD292200CE0008527A /* FolderEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderEntity.swift; sourceTree = "<group>"; };
-		D8C336DF2922010D0008527A /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		D8E464B22934679500275DF2 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		D8E464B32934679500275DF2 /* SearchViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchViewController.xib; sourceTree = "<group>"; };
 		D8F6C6C0292B204F00EF1A5F /* ListNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListNoteViewController.swift; sourceTree = "<group>"; };
@@ -104,6 +104,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		367E7F442937AC63009960F0 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				367E7F452937AC7D009960F0 /* SettingNoteViewController.swift */,
+				367E7F462937AC7D009960F0 /* SettingNoteViewController.xib */,
+			);
+			path = Setting;
+			sourceTree = "<group>";
+		};
 		53698B1396957D96F1C8F46F /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -224,8 +233,6 @@
 			isa = PBXGroup;
 			children = (
 				D8C336C12921E8460008527A /* NoteApp.xcdatamodeld */,
-				D8C336DD292200CE0008527A /* FolderEntity.swift */,
-				D8C336DF2922010D0008527A /* CoreDataManager.swift */,
 				D8B2CB5C29306D500008F5C4 /* Session.swift */,
 			);
 			path = Model;
@@ -288,6 +295,7 @@
 		D8F6C6CC292B638200EF1A5F /* NoteContent */ = {
 			isa = PBXGroup;
 			children = (
+				367E7F442937AC63009960F0 /* Setting */,
 				D8B2CB5E2930A87F0008F5C4 /* LockNote */,
 				D8F6C6CD292B639500EF1A5F /* NoteContentViewController.swift */,
 				D8F6C6CE292B639500EF1A5F /* NoteContentViewController.xib */,
@@ -380,6 +388,7 @@
 				D80FA522292490F600D0B9ED /* FolderTableViewCell.xib in Resources */,
 				D8F6C6D0292B639500EF1A5F /* NoteContentViewController.xib in Resources */,
 				D8C336C82921E8470008527A /* LaunchScreen.storyboard in Resources */,
+				367E7F482937AC7D009960F0 /* SettingNoteViewController.xib in Resources */,
 				D8C336DC2921FFE70008527A /* Color.xcassets in Resources */,
 				D8F6C6CB292B2FB300EF1A5F /* ItemTableViewCell.xib in Resources */,
 				D8F6C6C3292B204F00EF1A5F /* ListNoteViewController.xib in Resources */,
@@ -442,16 +451,15 @@
 				D80FA521292490F600D0B9ED /* FolderTableViewCell.swift in Sources */,
 				D8F6C6CF292B639500EF1A5F /* NoteContentViewController.swift in Sources */,
 				D8C336B92921E8460008527A /* AppDelegate.swift in Sources */,
-				D8C336DE292200CE0008527A /* FolderEntity.swift in Sources */,
 				D8F6C6CA292B2FB300EF1A5F /* ItemTableViewCell.swift in Sources */,
 				D80FA5252924910500D0B9ED /* SearchTableViewCell.swift in Sources */,
 				D80FA5352924D10400D0B9ED /* UITextField+.swift in Sources */,
 				D80FA5332924D10400D0B9ED /* String+.swift in Sources */,
+				367E7F472937AC7D009960F0 /* SettingNoteViewController.swift in Sources */,
 				D80FA5362924D10400D0B9ED /* Date+.swift in Sources */,
 				D80FA51529239BB000D0B9ED /* HomeModel.swift in Sources */,
 				D8F6C6D5292C72D900EF1A5F /* MLTransition.m in Sources */,
 				D8C336C32921E8460008527A /* NoteApp.xcdatamodeld in Sources */,
-				D8C336E02922010D0008527A /* CoreDataManager.swift in Sources */,
 				D80FA5312924D10400D0B9ED /* UIViewController+.swift in Sources */,
 				D80FA5342924D10400D0B9ED /* UIView+.swift in Sources */,
 				D8F6C6C7292B28EE00EF1A5F /* ListNoteModel.swift in Sources */,
