@@ -11,10 +11,11 @@
         <attribute name="idFolder" optional="YES" attributeType="String"/>
         <attribute name="idNote" optional="YES" attributeType="String"/>
         <attribute name="isLock" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="isPin" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="title" optional="YES" attributeType="String"/>
     </entity>
     <elements>
         <element name="FolderEntity" positionX="-54" positionY="18" width="128" height="88"/>
-        <element name="NoteEntity" positionX="203.5970458984375" positionY="137.85546875" width="128" height="133"/>
+        <element name="NoteEntity" positionX="203.5970458984375" positionY="137.85546875" width="128" height="148"/>
     </elements>
 </model>

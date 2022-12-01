@@ -61,9 +61,6 @@ class ListNoteViewController: UIViewController {
         do {
             listNote = try managedContext.fetch(fetchNoteRequest)
 
-            for item in listNote {
-                self.model.append(parseToListNote(item: item))
-            }
             self.noteCountLabel.text = "\(listNote.count) Notes"
         } catch let error as NSError {
             print("Could not fetch. \(error), \(error.userInfo)")
@@ -97,8 +94,39 @@ class ListNoteViewController: UIViewController {
         self.model.removeAll()
         
         let search = ListNoteModel(type: .search)
+        var pinText = ListNoteModel(type: .title)
+        pinText.title = "Pin"
+        pinText.fontTitle = UIFont.systemFont(ofSize: 15, weight: .medium)
+        
+        var noteText = ListNoteModel(type: .title)
+        noteText.title = "Notes"
+        noteText.fontTitle = UIFont.systemFont(ofSize: 15, weight: .medium)
         
         self.model.append(search)
+        
+        let listPin = listNote.filter({$0.value(forKey: "isPin") as? Bool ?? false == true})
+        
+        let listNormal = listNote.filter({!listPin.contains($0)})
+        
+        if !listPin.isEmpty && listNormal.isEmpty {
+            model.append(pinText)
+            for item in listPin {
+                model.append(parseToListNote(item: item))
+            }
+        } else if listPin.isEmpty && !listNormal.isEmpty {
+            for item in listNote {
+                model.append(parseToListNote(item: item))
+            }
+        } else if !listPin.isEmpty && !listNormal.isEmpty {
+            model.append(pinText)
+            for item in listPin {
+                model.append(parseToListNote(item: item))
+            }
+            model.append(noteText)
+            for item in listNormal {
+                model.append(parseToListNote(item: item))
+            }
+        }
 
         self.tableView.reloadData()
     }
@@ -130,6 +158,21 @@ class ListNoteViewController: UIViewController {
             print("Could not delete. \(error), \(error.userInfo)")
         }
     }
+    
+    func pinNote(id: String, isPin: Bool) {
+        let context = self.getContext()
+        let fetchRequest : NSFetchRequest<NoteEntity> = NoteEntity.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "idNote == %@", id)
+        do {
+            let results = try context.fetch(fetchRequest)
+            if let note = results.first {
+                note.isPin = isPin
+            }
+            try context.save()
+        } catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
+        }
+    }
 }
 
 extension ListNoteViewController: UITableViewDelegate, UITableViewDataSource {
@@ -142,6 +185,12 @@ extension ListNoteViewController: UITableViewDelegate, UITableViewDataSource {
         model = modelIndexPath(index: indexPath)
         
         switch model.type {
+        case .title:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "TitleTableViewCell", for: indexPath)
+                    as? TitleTableViewCell else { return UITableViewCell() }
+            cell.selectionStyle = .none
+            cell.setupData(data: model)
+            return cell
         case .item:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "ItemTableViewCell", for: indexPath)
                     as? ItemTableViewCell else { return UITableViewCell() }
@@ -183,15 +232,43 @@ extension ListNoteViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
-
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if (editingStyle == .delete) {
-            self.tableView.beginUpdates()
-            self.deleteNote(id: self.model[indexPath.row].idNote)
-            self.model.remove(at: indexPath.row)
-            self.tableView.deleteRows(at: [indexPath], with: .none)
-            self.tableView.endUpdates()
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        var pinText = "Pin"
+        var lockText = "Lock"
+        
+        if model[indexPath.row].isPin {
+            pinText = "Unpin"
         }
+        
+        if model[indexPath.row].isLock {
+            lockText = "Unlock"
+        }
+        
+        let pinAction = UITableViewRowAction(style: .normal, title: pinText) { [weak self] rowAction, indexPath in
+            if pinText == "Pin" {
+                self?.pinNote(id: self?.model[indexPath.row].idNote ?? "", isPin: true)
+            } else {
+                self?.pinNote(id: self?.model[indexPath.row].idNote ?? "", isPin: false)
+            }
+            self?.getData()
+        }
+        pinAction.backgroundColor = UIColor(hex: "#f39c12")
+        
+        let lockAction = UITableViewRowAction(style: .normal, title: lockText) { rowAction, indexPath in
+        
+        }
+        lockAction.backgroundColor = .lightGray
+        
+        let deleteAction = UITableViewRowAction(style: .normal, title: "Delete") { [weak self] rowAction, indexPath in
+            self?.tableView.beginUpdates()
+            self?.deleteNote(id: (self?.model[indexPath.row].idNote) ?? "")
+            self?.model.remove(at: indexPath.row)
+            self?.tableView.deleteRows(at: [indexPath], with: .none)
+            self?.tableView.endUpdates()
+        }
+        deleteAction.backgroundColor = UIColor(red: 1.00, green: 0.15, blue: 0.15, alpha: 0.8)
+        
+        return [pinAction, lockAction, deleteAction]
     }
-
 }
