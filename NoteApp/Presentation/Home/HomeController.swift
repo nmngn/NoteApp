@@ -28,6 +28,9 @@ class HomeController: UIViewController {
         super.viewDidLoad()
         configView()
         getData()
+        if let data = UserDefaults.standard.value(forKey: "password") as? Data {
+            Session.shared.passwordNote = data
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

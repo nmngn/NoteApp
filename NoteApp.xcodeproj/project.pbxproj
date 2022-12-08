@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		218133CE0BAB129F8591D057 /* Pods_NoteApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82CAA844755A9849F41104EC /* Pods_NoteApp.framework */; };
+		3679F037293B2699009A3BAD /* Crypto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3679F036293B2699009A3BAD /* Crypto.swift */; };
 		367E7F472937AC7D009960F0 /* SettingNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367E7F452937AC7D009960F0 /* SettingNoteViewController.swift */; };
 		367E7F482937AC7D009960F0 /* SettingNoteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 367E7F462937AC7D009960F0 /* SettingNoteViewController.xib */; };
 		D80FA51529239BB000D0B9ED /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80FA51429239BB000D0B9ED /* HomeModel.swift */; };
@@ -48,6 +49,7 @@
 
 /* Begin PBXFileReference section */
 		052467612AB716AA8E99F55F /* Pods-NoteApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoteApp.release.xcconfig"; path = "Target Support Files/Pods-NoteApp/Pods-NoteApp.release.xcconfig"; sourceTree = "<group>"; };
+		3679F036293B2699009A3BAD /* Crypto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Crypto.swift; sourceTree = "<group>"; };
 		367E7F452937AC7D009960F0 /* SettingNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingNoteViewController.swift; sourceTree = "<group>"; };
 		367E7F462937AC7D009960F0 /* SettingNoteViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingNoteViewController.xib; sourceTree = "<group>"; };
 		82CAA844755A9849F41104EC /* Pods_NoteApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NoteApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -153,6 +155,7 @@
 				D80FA52E2924D10400D0B9ED /* UITextField+.swift */,
 				D80FA52D2924D10400D0B9ED /* UIView+.swift */,
 				D80FA52A2924D10400D0B9ED /* UIViewController+.swift */,
+				3679F036293B2699009A3BAD /* Crypto.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -439,6 +442,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3679F037293B2699009A3BAD /* Crypto.swift in Sources */,
 				D80FA5322924D10400D0B9ED /* Other+.swift in Sources */,
 				D80FA521292490F600D0B9ED /* FolderTableViewCell.swift in Sources */,
 				D8F6C6CF292B639500EF1A5F /* NoteContentViewController.swift in Sources */,

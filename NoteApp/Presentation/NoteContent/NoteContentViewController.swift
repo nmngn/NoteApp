@@ -156,6 +156,21 @@ class NoteContentViewController: UIViewController {
             print("Could not save. \(error), \(error.userInfo)")
         }
     }
+    
+    func lockNote(id: String, isLock: Bool) {
+        let context = self.getContext()
+        let fetchRequest : NSFetchRequest<NoteEntity> = NoteEntity.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "idNote == %@", id)
+        do {
+            let results = try context.fetch(fetchRequest)
+            if let note = results.first {
+                note.isLock = isLock
+            }
+            try context.save()
+        } catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
+        }
+    }
 
     
     func getDataToSave(title: String, content: String, isLock: Bool, idNote: String, time: String) {
@@ -258,7 +273,11 @@ extension NoteContentViewController: ManipulationDelegate {
     }
     
     func lockNote() {
-
+        if !idNote.isEmpty {
+            self.lockNote(id: self.idNote, isLock: !self.isLock)
+            Session.shared.reloadInList = true
+        }
+        updateStatus()
     }
     
     func removeNote() {

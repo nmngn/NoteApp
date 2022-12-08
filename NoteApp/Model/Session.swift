@@ -13,5 +13,5 @@ class Session {
     var reloadInList = false
     var reloadInRoot = false
     
-    var passwordNote = ""
+    var passwordNote = Data()
 }
