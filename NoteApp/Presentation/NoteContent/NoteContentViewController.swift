@@ -86,17 +86,13 @@ class NoteContentViewController: UIViewController {
     
     override func touchBackButton() {
         saveData()
-//        if var viewControllers = navigationController?.viewControllers {
-//            if !viewControllers.isEmpty {
-//                let newController: [UIViewController] = viewControllers.removeAll(where: {$0 == LockNoteViewController()})
-//                viewControllers = newController
-//            }
-//        }
+        self.navigationController?.viewControllers.removeAll(where: {$0 is LockNoteViewController})
         self.navigationController?.popViewController(animated: true)
     }
     
     @objc func doneAction() {
         saveData()
+        self.navigationController?.viewControllers.removeAll(where: {$0 is LockNoteViewController})
         self.navigationController?.popViewController(animated: true)
     }
     
@@ -231,7 +227,13 @@ extension NoteContentViewController: ManipulationDelegate {
     
     func lockNote() {
         if !idNote.isEmpty {
-            self.lockNote(id: self.idNote, isLock: !self.isLock)
+            if Session.shared.passwordNote.isEmpty {
+                self.createPassword(actionAfterSetPassword: { [weak self] in
+                    self?.lockNote(id: self?.idNote ?? "", isLock: true)
+                })
+            } else {
+                self.lockNote(id: self.idNote, isLock: !self.isLock)
+            }
             Session.shared.reloadInList = true
         }
         updateStatus()
