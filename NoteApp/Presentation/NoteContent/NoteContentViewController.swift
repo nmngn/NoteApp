@@ -86,18 +86,13 @@ class NoteContentViewController: UIViewController {
     
     override func touchBackButton() {
         saveData()
-        if let navController = self.navigationController, navController.viewControllers.count >= 2 {
-            if let dataContent = dataContent {
-                if !dataContent.isLock {
-                    let viewController = navController.viewControllers[navController.viewControllers.count - 2]
-                    self.navigationController?.popToViewController(viewController, animated: true)
-                }
-            } else {
-                self.navigationController?.popViewController(animated: true)
-            }
-        } else {
-            self.navigationController?.popViewController(animated: true)
-        }
+//        if var viewControllers = navigationController?.viewControllers {
+//            if !viewControllers.isEmpty {
+//                let newController: [UIViewController] = viewControllers.removeAll(where: {$0 == LockNoteViewController()})
+//                viewControllers = newController
+//            }
+//        }
+        self.navigationController?.popViewController(animated: true)
     }
     
     @objc func doneAction() {

@@ -226,7 +226,19 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
+        var model: HomeModel
+        model = modelIndexPath(index: indexPath)
+        
+        switch model.type {
+        case .folder:
+            if model.idFolder.isEmpty {
+                return false
+            } else {
+                return true
+            }
+        default:
+            return false
+        }
     }
 
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {

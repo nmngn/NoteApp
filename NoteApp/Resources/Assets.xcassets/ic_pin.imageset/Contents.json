@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "thumbtacks 1.png",
+      "filename" : "push-pin.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "thumbtacks 1@2x.png",
+      "filename" : "push-pin-1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "thumbtacks 1@3x.png",
+      "filename" : "push-pin-2.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

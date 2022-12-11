@@ -210,16 +210,21 @@ extension ListNoteViewController: UITableViewDelegate, UITableViewDataSource {
                 self.title = ""
                 self.navigationController?.pushViewController(vc, animated: true)
             }
-        case .search:
-            let vc = LockNoteViewController.init(nibName: LockNoteViewController.className, bundle: nil)
-            self.navigationController?.pushViewController(vc, animated: true)
         default:
             break
         }
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
+        var model: ListNoteModel
+        model = modelIndexPath(index: indexPath)
+        
+        switch model.type {
+        case .item:
+            return true
+        default:
+            return false
+        }
     }
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
@@ -249,24 +254,44 @@ extension ListNoteViewController: UITableViewDelegate, UITableViewDataSource {
                 self?.createPassword(actionAfterSetPassword: { [weak self] in
                     self?.lockNote(id: self?.model[indexPath.row].idNote ?? "", isLock: true)
                 })
+                self?.getDataOfNote(id: self?.model[indexPath.row].idNote ?? "", indexPath: indexPath)
+                self?.tableView.reloadRows(at: [IndexPath(row: indexPath.row, section: 0)], with: .automatic)
             } else {
                 if lockText == "Lock" {
                     self?.lockNote(id: self?.model[indexPath.row].idNote ?? "", isLock: true)
                 } else {
-                    self?.lockNote(id: self?.model[indexPath.row].idNote ?? "", isLock: false)
+                    if let isLock = self?.model[indexPath.row].isLock, isLock {
+                        self?.presentAlertUnlock { [weak self] in
+                            self?.lockNote(id: self?.model[indexPath.row].idNote ?? "", isLock: false)
+                            self?.getDataOfNote(id: self?.model[indexPath.row].idNote ?? "", indexPath: indexPath)
+                            self?.tableView.reloadRows(at: [IndexPath(row: indexPath.row, section: 0)], with: .automatic)
+                        }
+                    }
                 }
+                self?.getDataOfNote(id: self?.model[indexPath.row].idNote ?? "", indexPath: indexPath)
+                self?.tableView.reloadRows(at: [IndexPath(row: indexPath.row, section: 0)], with: .automatic)
             }
-            self?.getDataOfNote(id: self?.model[indexPath.row].idNote ?? "", indexPath: indexPath)
-            self?.tableView.reloadRows(at: [IndexPath(row: indexPath.row, section: 0)], with: .automatic)
         }
         lockAction.backgroundColor = .lightGray
         
         let deleteAction = UITableViewRowAction(style: .normal, title: "Delete") { [weak self] rowAction, indexPath in
-            self?.tableView.beginUpdates()
-            self?.deleteNote(idNote: (self?.model[indexPath.row].idNote) ?? "")
-            self?.model.remove(at: indexPath.row)
-            self?.tableView.deleteRows(at: [indexPath], with: .none)
-            self?.tableView.endUpdates()
+            if let note = self?.model[indexPath.row] {
+                if note.isLock {
+                    self?.presentAlertUnlock { [weak self] in
+                        self?.tableView.beginUpdates()
+                        self?.deleteNote(idNote: (self?.model[indexPath.row].idNote) ?? "")
+                        self?.model.remove(at: indexPath.row)
+                        self?.tableView.deleteRows(at: [indexPath], with: .none)
+                        self?.tableView.endUpdates()
+                    }
+                } else {
+                    self?.tableView.beginUpdates()
+                    self?.deleteNote(idNote: (self?.model[indexPath.row].idNote) ?? "")
+                    self?.model.remove(at: indexPath.row)
+                    self?.tableView.deleteRows(at: [indexPath], with: .none)
+                    self?.tableView.endUpdates()
+                }
+            }
         }
         deleteAction.backgroundColor = UIColor(red: 1.00, green: 0.15, blue: 0.15, alpha: 0.8)
         

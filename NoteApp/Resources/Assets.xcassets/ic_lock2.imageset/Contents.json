@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "lock-g48459b155_1280 1.png",
+      "filename" : "padlock.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "lock-g48459b155_1280 1@2x.png",
+      "filename" : "padlock-1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "lock-g48459b155_1280 1@3x.png",
+      "filename" : "padlock-2.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

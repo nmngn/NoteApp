@@ -50,14 +50,9 @@ extension UIViewController {
             let button =  UIButton(type: .custom)
             button.setImage(UIImage(named: "ic_left_arrow")?.withRenderingMode(.alwaysOriginal), for: .normal)
             button.addTarget(self, action: #selector(touchBackButton), for: .touchUpInside)
-            button.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
-            let label = UILabel(frame: CGRect(x: button.frame.maxX + 2, y: (button.frame.height - 20) / 2, width: 40, height: 20))
-            label.font = UIFont.systemFont(ofSize: 16, weight: .medium)
-            label.text = "Back"
-            label.textAlignment = .center
-            label.textColor = .black
-            label.backgroundColor =  .clear
-            button.addSubview(label)
+            button.frame = CGRect(x: 0, y: 0, width: 60, height: 30)
+            button.setTitle("Back", for: .normal)
+            button.setTitleColor(.black, for: .normal)
             let barButton = UIBarButtonItem(customView: button)
             navigationItem.leftBarButtonItem = barButton
         } else {
@@ -69,6 +64,7 @@ extension UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
+    // MARK: - CoreData
     func parseToHomeModel(item: NSManagedObject) -> HomeModel {
         let id = item.value(forKey: "idFolder") as? String ?? ""
         let text = item.value(forKey: "title") as? String ?? ""
@@ -109,6 +105,7 @@ extension UIViewController {
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         alertController.addTextField { alertTextField in
             alertTextField.placeholder = "Password"
+            alertTextField.isSecureTextEntry = true
             textField = alertTextField
         }
         alertController.addAction(createAction)
@@ -194,6 +191,7 @@ extension UIViewController {
                 note.isLock = isLock
             }
             try context.save()
+            self.view.makeToast(isLock ? "Lock" : "Unlock")
             Session.shared.reloadInList = true
         } catch let error as NSError {
             print("Could not save. \(error), \(error.userInfo)")
@@ -210,6 +208,7 @@ extension UIViewController {
                 note.isPin = isPin
             }
             try context.save()
+            self.view.makeToast(isPin ? "Pin" : "Unpin")
             Session.shared.reloadInList = true
         } catch let error as NSError {
             print("Could not save. \(error), \(error.userInfo)")

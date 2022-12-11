@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "toppng 1.png",
+      "filename" : "open-padlock.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "toppng 1@2x.png",
+      "filename" : "open-padlock-1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "toppng 1@3x.png",
+      "filename" : "open-padlock-2.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

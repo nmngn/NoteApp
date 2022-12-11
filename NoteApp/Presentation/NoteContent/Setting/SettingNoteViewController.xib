@@ -328,8 +328,8 @@
     </objects>
     <resources>
         <image name="ic_delete" width="24" height="24"/>
-        <image name="ic_lock2" width="21" height="24"/>
-        <image name="ic_pin" width="24" height="24"/>
+        <image name="ic_lock2" width="256" height="256"/>
+        <image name="ic_pin" width="256" height="256"/>
         <image name="xmark.circle.fill" catalog="system" width="128" height="121"/>
         <namedColor name="NewBG">
             <color red="0.96100002527236938" green="0.9649999737739563" blue="0.98000001907348633" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

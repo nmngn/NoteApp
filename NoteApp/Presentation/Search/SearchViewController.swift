@@ -63,9 +63,17 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = NoteContentViewController.init(nibName: NoteContentViewController.className, bundle: nil)
-        vc.dataContent = model[indexPath.row]
-        self.navigationController?.pushViewController(vc, animated: true)
+        if model[indexPath.row].isLock {
+            let vc = LockNoteViewController.init(nibName: LockNoteViewController.className, bundle: nil)
+            vc.dataNote = model[indexPath.row]
+            self.title = ""
+            self.navigationController?.pushViewController(vc, animated: true)
+        } else {
+            let vc = NoteContentViewController.init(nibName: NoteContentViewController.className, bundle: nil)
+            vc.dataContent = model[indexPath.row]
+            self.title = ""
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
     }
 }
 
