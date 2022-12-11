@@ -42,7 +42,7 @@ class SettingNoteViewController: UIViewController {
             pinText.text = model.isPin ? "Unpin" : "Pin"
             lockText.text = model.isLock ? "Unlock" : "Lock"
             imagePin.image = model.isPin ? UIImage(named: "ic_unpin") : UIImage(named: "ic_pin")
-            imageLock.image = model.isPin ? UIImage(named: "ic_unlock") : UIImage(named: "ic_lock2")
+            imageLock.image = model.isLock ? UIImage(named: "ic_unlock") : UIImage(named: "ic_lock2")
         }
     }
     

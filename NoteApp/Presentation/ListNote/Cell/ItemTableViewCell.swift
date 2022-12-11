@@ -23,6 +23,8 @@ class ItemTableViewCell: UITableViewCell {
         contentLabel.text = "\(model.date.prefix(10))   \(model.contentNote)"
         if model.isLock {
             isLock.image = UIImage(named: "ic_lock")
+        } else {
+            isLock.image = UIImage()
         }
     }
 }

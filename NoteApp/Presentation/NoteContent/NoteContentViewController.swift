@@ -86,7 +86,18 @@ class NoteContentViewController: UIViewController {
     
     override func touchBackButton() {
         saveData()
-        self.navigationController?.popViewController(animated: true)
+        if let navController = self.navigationController, navController.viewControllers.count >= 2 {
+            if let dataContent = dataContent {
+                if !dataContent.isLock {
+                    let viewController = navController.viewControllers[navController.viewControllers.count - 2]
+                    self.navigationController?.popToViewController(viewController, animated: true)
+                }
+            } else {
+                self.navigationController?.popViewController(animated: true)
+            }
+        } else {
+            self.navigationController?.popViewController(animated: true)
+        }
     }
     
     @objc func doneAction() {
@@ -118,61 +129,10 @@ class NoteContentViewController: UIViewController {
                           , idNote: self.idNote
                           , time: timeLabel.text ?? getCurrentDate())
         } else if titleTextView.text.isEmpty && contentTextView.text.isEmpty && !self.idNote.isEmpty {
-            deleteNote()
+            deleteNote(idNote: idNote)
         }
     }
-    
-    func deleteNote() {
-        let context = getContext()
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "NoteEntity")
-        request.predicate = NSPredicate(format: "idNote = %@", idNote)
-
-        do {
-            let result = try context.fetch(request)
-            for object in result {
-                context.delete(object as! NSManagedObject)
-            }
-            try context.save()
-            Session.shared.reloadInRoot = true
-            Session.shared.reloadInList = true
-            self.view.makeToast("Deleted")
-        } catch let error as NSError {
-            print("Could not delete. \(error), \(error.userInfo)")
-        }
-    }
-    
-    func pinNote(id: String, isPin: Bool) {
-        let context = self.getContext()
-        let fetchRequest : NSFetchRequest<NoteEntity> = NoteEntity.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "idNote == %@", id)
-        do {
-            let results = try context.fetch(fetchRequest)
-            if let note = results.first {
-                note.isPin = isPin
-            }
-            try context.save()
-            self.view.makeToast(!isPin ? "Unpinned" : "Pinned")
-        } catch let error as NSError {
-            print("Could not save. \(error), \(error.userInfo)")
-        }
-    }
-    
-    func lockNote(id: String, isLock: Bool) {
-        let context = self.getContext()
-        let fetchRequest : NSFetchRequest<NoteEntity> = NoteEntity.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "idNote == %@", id)
-        do {
-            let results = try context.fetch(fetchRequest)
-            if let note = results.first {
-                note.isLock = isLock
-            }
-            try context.save()
-        } catch let error as NSError {
-            print("Could not save. \(error), \(error.userInfo)")
-        }
-    }
-
-    
+        
     func getDataToSave(title: String, content: String, isLock: Bool, idNote: String, time: String) {
         let context = getContext()
         
@@ -190,6 +150,7 @@ class NoteContentViewController: UIViewController {
                     note.idFolder = self.idFolder
                 }
                 try context.save()
+                Session.shared.reloadInList = true
                 Session.shared.reloadInRoot = true
             } catch let error as NSError {
                 print("Could not save. \(error), \(error.userInfo)")
@@ -207,6 +168,7 @@ class NoteContentViewController: UIViewController {
             
             do {
                 try context.save()
+                Session.shared.reloadInList = true
                 Session.shared.reloadInRoot = true
             } catch let error as NSError {
                 print("Could not save. \(error), \(error.userInfo)")
@@ -224,9 +186,9 @@ class NoteContentViewController: UIViewController {
             let listNote = try managedContext.fetch(fetchNoteRequest)
             
             if !listNote.isEmpty {
-                self.dataContent = parseToListNote(item: listNote.first!)
                 self.isPin = listNote.first?.value(forKey: "isPin") as? Bool ?? false
                 self.isLock = listNote.first?.value(forKey: "isLock") as? Bool ?? false
+                self.dataContent = parseToListNote(item: listNote.first!)
             } else {
                 self.view.makeToast("You must save note before pin")
             }
@@ -281,7 +243,7 @@ extension NoteContentViewController: ManipulationDelegate {
     }
     
     func removeNote() {
-        self.deleteNote()
+        self.deleteNote(idNote: idNote)
         self.navigationController?.popViewController(animated: true)
     }
 }

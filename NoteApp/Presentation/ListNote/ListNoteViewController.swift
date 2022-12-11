@@ -142,38 +142,6 @@ class ListNoteViewController: UIViewController {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
-    func deleteNote(id: String) {
-        let context = getContext()
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "NoteEntity")
-        request.predicate = NSPredicate(format: "idNote = %@", id)
-
-        do {
-            let result = try context.fetch(request)
-            for object in result {
-                context.delete(object as! NSManagedObject)
-            }
-            try context.save()
-            Session.shared.reloadInRoot = true
-        } catch let error as NSError {
-            print("Could not delete. \(error), \(error.userInfo)")
-        }
-    }
-    
-    func pinNote(id: String, isPin: Bool) {
-        let context = self.getContext()
-        let fetchRequest : NSFetchRequest<NoteEntity> = NoteEntity.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "idNote == %@", id)
-        do {
-            let results = try context.fetch(fetchRequest)
-            if let note = results.first {
-                note.isPin = isPin
-            }
-            try context.save()
-        } catch let error as NSError {
-            print("Could not save. \(error), \(error.userInfo)")
-        }
-    }
-    
     func getDataOfNote(id: String, indexPath: IndexPath) {
         let context = self.getContext()
         let fetchNoteRequest = NSFetchRequest<NSManagedObject>(entityName: "NoteEntity")
@@ -187,31 +155,6 @@ class ListNoteViewController: UIViewController {
         } catch let error as NSError {
             print("Could not save. \(error), \(error.userInfo)")
         }
-    }
-    
-    func lockNote(id: String, isLock: Bool) {
-        let context = self.getContext()
-        let fetchRequest : NSFetchRequest<NoteEntity> = NoteEntity.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "idNote == %@", id)
-        do {
-            let results = try context.fetch(fetchRequest)
-            if let note = results.first {
-                note.isLock = isLock
-            }
-            try context.save()
-        } catch let error as NSError {
-            print("Could not save. \(error), \(error.userInfo)")
-        }
-    }
-    
-    func createPassword(text: String) {
-        let key32 = (UIDevice.current.identifierForVendor?.uuidString.prefix(32))!
-        let iv = (UIDevice.current.identifierForVendor?.uuidString.suffix(16))!
-        let aes256 = AES(key: String(key32), iv: String(iv))
-        let encryptPassword = aes256?.encrypt(string: text)
-//        let result = aes256?.decrypt(data: encryptPassword)
-        Session.shared.passwordNote = encryptPassword ?? Data()
-        UserDefaults.standard.setValue(encryptPassword, forKey: "password")
     }
 }
 
@@ -256,10 +199,17 @@ extension ListNoteViewController: UITableViewDelegate, UITableViewDataSource {
         
         switch model.type {
         case .item:
-            let vc = NoteContentViewController.init(nibName: NoteContentViewController.className, bundle: nil)
-            vc.dataContent = model
-            self.title = ""
-            self.navigationController?.pushViewController(vc, animated: true)
+            if model.isLock {
+                let vc = LockNoteViewController.init(nibName: LockNoteViewController.className, bundle: nil)
+                vc.dataNote = model
+                self.title = ""
+                self.navigationController?.pushViewController(vc, animated: true)
+            } else {
+                let vc = NoteContentViewController.init(nibName: NoteContentViewController.className, bundle: nil)
+                vc.dataContent = model
+                self.title = ""
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
         case .search:
             let vc = LockNoteViewController.init(nibName: LockNoteViewController.className, bundle: nil)
             self.navigationController?.pushViewController(vc, animated: true)
@@ -296,42 +246,9 @@ extension ListNoteViewController: UITableViewDelegate, UITableViewDataSource {
         
         let lockAction = UITableViewRowAction(style: .normal, title: lockText) { [weak self] rowAction, indexPath in
             if Session.shared.passwordNote.isEmpty {
-                var newPassword = UITextField()
-                var confirmPassword = UITextField()
-                
-                let alert = UIAlertController(title: "Notify", message: "You have not set password before, let create your password", preferredStyle: .alert)
-                alert.addTextField { textField in
-                    textField.isSecureTextEntry = true
-                    textField.autocorrectionType = .no
-                    newPassword = textField
-                    textField.placeholder = "New password"
-                }
-                
-                alert.addTextField { textField in
-                    textField.isSecureTextEntry = true
-                    textField.autocorrectionType = .no
-                    confirmPassword = textField
-                    textField.placeholder = "Confirm password"
-                }
-                
-                let saveAction = UIAlertAction(title: "Ok", style: .default) { [weak self] action in
-                    if let newText = newPassword.text, let newConfirm = confirmPassword.text {
-                        if !newText.isEmpty && !newConfirm.isEmpty {
-                            if newText == newConfirm {
-                                self?.createPassword(text: newConfirm)
-                                self?.lockNote(id: self?.model[indexPath.row].idNote ?? "", isLock: true)
-                            } else {
-                                self?.view.makeToast("Password do not match")
-                            }
-                        } else {
-                            self?.view.makeToast("Password must not empty")
-                        }
-                    }
-                }
-                let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-                alert.addAction(saveAction)
-                alert.addAction(cancelAction)
-                self?.present(alert, animated: true, completion: nil)
+                self?.createPassword(actionAfterSetPassword: { [weak self] in
+                    self?.lockNote(id: self?.model[indexPath.row].idNote ?? "", isLock: true)
+                })
             } else {
                 if lockText == "Lock" {
                     self?.lockNote(id: self?.model[indexPath.row].idNote ?? "", isLock: true)
@@ -346,7 +263,7 @@ extension ListNoteViewController: UITableViewDelegate, UITableViewDataSource {
         
         let deleteAction = UITableViewRowAction(style: .normal, title: "Delete") { [weak self] rowAction, indexPath in
             self?.tableView.beginUpdates()
-            self?.deleteNote(id: (self?.model[indexPath.row].idNote) ?? "")
+            self?.deleteNote(idNote: (self?.model[indexPath.row].idNote) ?? "")
             self?.model.remove(at: indexPath.row)
             self?.tableView.deleteRows(at: [indexPath], with: .none)
             self?.tableView.endUpdates()

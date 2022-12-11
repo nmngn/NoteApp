@@ -6,29 +6,44 @@
 //
 
 import UIKit
+import CoreData
 
 class LockNoteViewController: UIViewController {
 
+    var dataNote: ListNoteModel?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationButton()
     }
+    
+    func getDataOfNote(id: String) {
+        let context = self.getContext()
+        let fetchNoteRequest = NSFetchRequest<NSManagedObject>(entityName: "NoteEntity")
+        fetchNoteRequest.predicate = NSPredicate(format: "idNote = %@", id)
+        
+        do {
+            let results = try context.fetch(fetchNoteRequest)
+            if !results.isEmpty, let note = results.first {
+                dataNote = parseToListNote(item: note)
+            }
+        } catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
+        }
+    }
 
     @IBAction func unlockAction(_ sender: UIButton) {
-        var textField = UITextField()
-        let alertController = UIAlertController(title: "View Note", message: "To view locked note, enter the note password", preferredStyle: .alert)
-        let createAction = UIAlertAction(title: "Ok", style: .default) { [weak self] _ in
-            if let text = textField.text, !text.isEmpty {
-                print(text)
+        self.presentAlertUnlock(actionAfterUnlockSuccess: { [weak self] in
+            if let dataNote = self?.dataNote {
+                self?.lockNote(id: dataNote.idNote, isLock: !dataNote.isLock)
+                self?.getDataOfNote(id: dataNote.idNote)
+                if dataNote.isLock {
+                    let vc = NoteContentViewController.init(nibName: NoteContentViewController.className, bundle: nil)
+                    vc.dataContent = self?.dataNote
+                    self?.title = ""
+                    self?.navigationController?.pushViewController(vc, animated: true)
+                }
             }
-        }
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        alertController.addTextField { alertTextField in
-            alertTextField.placeholder = "Password"
-            textField = alertTextField
-        }
-        alertController.addAction(createAction)
-        alertController.addAction(cancelAction)
-        present(alertController, animated: true, completion: nil)
+        })
     }
 }
