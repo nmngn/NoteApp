@@ -12,6 +12,8 @@ protocol ManipulationDelegate {
     func pinNote()
     func lockNote()
     func removeNote()
+    func share()
+    func moveToFolder()
 }
 
 class SettingNoteViewController: UIViewController {
@@ -66,10 +68,12 @@ class SettingNoteViewController: UIViewController {
     }
     
     @IBAction func shareAction(_ sender: UIButton) {
-        
+        self.dismiss(animated: true, completion: nil)
+        delegate?.share()
     }
     
-    @IBAction func sendAction(_ sender: UIButton) {
+    @IBAction func moveToFolder(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: nil)
+        delegate?.moveToFolder()
     }
-    
 }

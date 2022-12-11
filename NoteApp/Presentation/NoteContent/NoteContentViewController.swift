@@ -243,4 +243,12 @@ extension NoteContentViewController: ManipulationDelegate {
         self.deleteNote(idNote: idNote)
         self.navigationController?.popViewController(animated: true)
     }
+    
+    func share() {
+        
+    }
+    
+    func moveToFolder() {
+        
+    }
 }
