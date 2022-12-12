@@ -15,6 +15,7 @@ class NoteContentViewController: UIViewController {
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var titleTextView: UITextView!
     @IBOutlet weak var contentTextView: UITextView!
+    @IBOutlet weak var scrollView: UIScrollView!
     
     var dataContent: ListNoteModel?
     
@@ -49,9 +50,13 @@ class NoteContentViewController: UIViewController {
         titleTextView.delegate = self
         titleTextView.autocorrectionType = .no
         titleTextView.becomeFirstResponder()
+        
         contentTextView.delegate = self
         contentTextView.autocorrectionType = .no
         contentTextView.isEditable = false
+        
+        scrollView.keyboardDismissMode = .onDrag
+        
         scrollViewHeightConstraint.constant = 0
     }
     
@@ -167,7 +172,7 @@ class NoteContentViewController: UIViewController {
         }
     }
     
-    func updateStatus() {
+    func updateStatus(action: String) {
         let managedContext = getContext()
         
         let fetchNoteRequest = NSFetchRequest<NSManagedObject>(entityName: "NoteEntity")
@@ -181,7 +186,7 @@ class NoteContentViewController: UIViewController {
                 self.isLock = listNote.first?.value(forKey: "isLock") as? Bool ?? false
                 self.dataContent = parseToListNote(item: listNote.first!)
             } else {
-                self.view.makeToast("You must save note before pin")
+                self.view.makeToast("You must save note before \(action)")
             }
         } catch let error as NSError {
             print("Could not fetch. \(error), \(error.userInfo)")
@@ -222,7 +227,7 @@ extension NoteContentViewController: ManipulationDelegate {
             self.pinNote(id: self.idNote, isPin: !self.isPin)
             Session.shared.reloadInList = true
         }
-        updateStatus()
+        updateStatus(action: "pin")
     }
     
     func lockNote() {
@@ -230,13 +235,15 @@ extension NoteContentViewController: ManipulationDelegate {
             if Session.shared.passwordNote.isEmpty {
                 self.createPassword(actionAfterSetPassword: { [weak self] in
                     self?.lockNote(id: self?.idNote ?? "", isLock: true)
+                    Session.shared.reloadInList = true
+                    self?.updateStatus(action: "lock")
                 })
             } else {
                 self.lockNote(id: self.idNote, isLock: !self.isLock)
             }
             Session.shared.reloadInList = true
         }
-        updateStatus()
+        updateStatus(action: "lock")
     }
     
     func removeNote() {
@@ -245,7 +252,19 @@ extension NoteContentViewController: ManipulationDelegate {
     }
     
     func share() {
+        let text = "Share note: \n\(dataContent?.titleNote ?? "") \n\(dataContent?.contentNote ?? "")"
         
+        let textToShare = [text]
+        let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
+        activityViewController.popoverPresentationController?.sourceView = self.view
+        activityViewController.excludedActivityTypes = [.airDrop,
+                                                        .postToFacebook,
+                                                        .mail ,
+                                                        .copyToPasteboard,
+                                                        .message,
+                                                        .postToTwitter]
+        
+        self.present(activityViewController, animated: true, completion: nil)
     }
     
     func moveToFolder() {
