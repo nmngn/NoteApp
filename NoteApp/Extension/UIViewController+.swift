@@ -233,5 +233,24 @@ extension UIViewController {
             print("Could not delete. \(error), \(error.userInfo)")
         }
     }
-
+    
+    func getListFolder() -> [HomeModel] {
+        let managedContext = getContext()
+        var listFolder = [HomeModel]()
+        
+        let fetchFolderRequest = NSFetchRequest<NSManagedObject>(entityName: "FolderEntity")
+        
+        do {
+            let data = try managedContext.fetch(fetchFolderRequest)
+            
+            for item in data {
+                let folder = parseToHomeModel(item: item)
+                listFolder.append(folder)
+            }
+            return listFolder
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+        }
+        return listFolder
+    }
 }

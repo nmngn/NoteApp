@@ -152,7 +152,7 @@ class HomeController: UIViewController {
         
         do {
             try context.save()
-            self.tableView.es.startPullToRefresh()
+            self.getData()
         } catch let error as NSError {
             print("Could not save. \(error), \(error.userInfo)")
         }
