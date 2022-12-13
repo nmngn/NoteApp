@@ -16,7 +16,7 @@ class NoteContentViewController: UIViewController {
     @IBOutlet weak var titleTextView: UITextView!
     @IBOutlet weak var contentTextView: UITextView!
     @IBOutlet weak var scrollView: UIScrollView!
-    
+
     var dataContent: ListNoteModel?
     
     var idNote = ""
@@ -289,5 +289,55 @@ extension NoteContentViewController: ManipulationDelegate {
         let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         alertController.addAction(cancel)
         present(alertController, animated: true, completion: nil)
+    }
+}
+
+extension NoteContentViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func openLibararies() {
+        let alert = UIAlertController(title: "Select Photo Type".localized, message: nil, preferredStyle: .actionSheet)
+        
+        alert.addAction(UIAlertAction(title: "Photo Library".localized, style: .default , handler:{ (UIAlertAction)in
+            self.openMedia(type: .photoLibrary)
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Camera".localized, style: .default , handler:{ (UIAlertAction)in
+            self.openMedia(type: .camera)
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Cancel".localized, style: .cancel, handler:{ (UIAlertAction)in
+            print("User click Dismiss button")
+        }))
+        
+        self.present(alert, animated: true, completion: {
+            print("completion block")
+        })
+    }
+    
+    private func openMedia(type: UIImagePickerController.SourceType) {
+        let vc = UIImagePickerController()
+        vc.sourceType = type
+        vc.videoQuality = .typeHigh
+        vc.allowsEditing = false
+        vc.delegate = self
+        present(vc, animated: true)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            let attributedString = NSMutableAttributedString(string: contentTextView.text)
+            let textAttachment = NSTextAttachment()
+            textAttachment.image = image
+
+            let oldWidth = textAttachment.image!.size.width;
+
+            let scaleFactor = oldWidth / (self.contentTextView.frame.size.width - 10);
+            guard let newImage = textAttachment.image?.cgImage else { return }
+            textAttachment.image = UIImage(cgImage: newImage, scale: scaleFactor, orientation: .up)
+            
+            let attrStringWithImage = NSAttributedString(attachment: textAttachment)
+            attributedString.append(attrStringWithImage)
+            contentTextView.attributedText = attributedString;
+        }
+        picker.dismiss(animated: true, completion: nil)
     }
 }
