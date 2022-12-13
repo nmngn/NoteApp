@@ -244,6 +244,7 @@ extension NoteContentViewController: ManipulationDelegate {
             Session.shared.reloadInList = true
         }
         updateStatus(action: "lock")
+        self.navigationController?.popViewController(animated: true)
     }
     
     func removeNote() {
@@ -268,6 +269,23 @@ extension NoteContentViewController: ManipulationDelegate {
     }
     
     func moveToFolder() {
+        let alertController = UIAlertController(title: "Select folder", message: "Select folder want to move", preferredStyle: .actionSheet)
+        let listFolder = self.getListFolder()
         
+        let folder = UIAlertAction(title: "Quick Folder", style: .default) { [weak self] _ in
+            self?.moveToFolder(idNote: self?.idNote ?? "" , idFolder: "")
+        }
+        
+        alertController.addAction(folder)
+        
+        for item in listFolder {
+            let folder = UIAlertAction(title: item.titleFolder, style: .default) { [weak self] _ in
+                self?.moveToFolder(idNote: self?.idNote ?? "", idFolder: item.idFolder)
+            }
+            alertController.addAction(folder)
+        }
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alertController.addAction(cancel)
+        present(alertController, animated: true, completion: nil)
     }
 }

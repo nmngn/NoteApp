@@ -122,7 +122,9 @@ class HomeController: UIViewController {
         let alertController = UIAlertController(title: "Create folder", message: "Create new folder", preferredStyle: .alert)
         let createAction = UIAlertAction(title: "Create", style: .default) { [weak self] _ in
             if let text = textField.text, !text.isEmpty {
-                self?.createFolder(folderTitle: text)
+                self?.createFolder(folderTitle: text, completion: { [weak self] in
+                    self?.getData()
+                })
             }
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
@@ -140,38 +142,6 @@ class HomeController: UIViewController {
         vc.idFolder = ""
         self.title = ""
         self.navigationController?.pushViewController(vc, animated: true)
-    }
-    
-    func createFolder(folderTitle: String) {
-        let context = getContext()
-        let entity = NSEntityDescription.entity(forEntityName: "FolderEntity", in: context)!
-        let folder = NSManagedObject(entity: entity, insertInto: context)
-        
-        folder.setValue(folderTitle, forKey: "title")
-        folder.setValue(UUID().uuidString, forKey: "idFolder")
-        
-        do {
-            try context.save()
-            self.getData()
-        } catch let error as NSError {
-            print("Could not save. \(error), \(error.userInfo)")
-        }
-    }
-    
-    func deleteFolder(id: String) {
-        let context = getContext()
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "FolderEntity")
-        request.predicate = NSPredicate(format: "idFolder = %@", id)
-
-        do {
-            let result = try context.fetch(request)
-            for object in result {
-                context.delete(object as! NSManagedObject)
-            }
-            try context.save()
-        } catch let error as NSError {
-            print("Could not delete. \(error), \(error.userInfo)")
-        }
     }
 }
 

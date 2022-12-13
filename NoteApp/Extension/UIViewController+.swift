@@ -181,6 +181,7 @@ extension UIViewController {
         return false
     }
     
+    // MARK: - Note
     func lockNote(id: String, isLock: Bool) {
         let context = self.getContext()
         let fetchRequest : NSFetchRequest<NoteEntity> = NoteEntity.fetchRequest()
@@ -229,6 +230,57 @@ extension UIViewController {
             Session.shared.reloadInRoot = true
             Session.shared.reloadInList = true
             self.view.makeToast("Deleted")
+        } catch let error as NSError {
+            print("Could not delete. \(error), \(error.userInfo)")
+        }
+    }
+
+    func moveToFolder(idNote: String, idFolder: String) {
+        let context = self.getContext()
+        let fetchRequest : NSFetchRequest<NoteEntity> = NoteEntity.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "idNote == %@", idNote)
+        do {
+            let results = try context.fetch(fetchRequest)
+            if let note = results.first {
+                note.idFolder = idFolder
+            }
+            try context.save()
+            self.view.makeToast("Moved")
+            Session.shared.reloadInList = true
+            Session.shared.reloadInRoot = true
+        } catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
+        }
+    }
+
+    // MARK: - Folder
+    func createFolder(folderTitle: String, completion: @escaping (() -> ())) {
+        let context = getContext()
+        let entity = NSEntityDescription.entity(forEntityName: "FolderEntity", in: context)!
+        let folder = NSManagedObject(entity: entity, insertInto: context)
+        
+        folder.setValue(folderTitle, forKey: "title")
+        folder.setValue(UUID().uuidString, forKey: "idFolder")
+        
+        do {
+            try context.save()
+            completion()
+        } catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
+        }
+    }
+    
+    func deleteFolder(id: String) {
+        let context = getContext()
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "FolderEntity")
+        request.predicate = NSPredicate(format: "idFolder = %@", id)
+
+        do {
+            let result = try context.fetch(request)
+            for object in result {
+                context.delete(object as! NSManagedObject)
+            }
+            try context.save()
         } catch let error as NSError {
             print("Could not delete. \(error), \(error.userInfo)")
         }
