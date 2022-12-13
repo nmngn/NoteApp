@@ -273,6 +273,7 @@ extension NoteContentViewController: ManipulationDelegate {
         let listFolder = self.getListFolder()
         
         let folder = UIAlertAction(title: "Quick Folder", style: .default) { [weak self] _ in
+            self?.idFolder = ""
             self?.moveToFolder(idNote: self?.idNote ?? "" , idFolder: "")
         }
         
@@ -280,6 +281,7 @@ extension NoteContentViewController: ManipulationDelegate {
         
         for item in listFolder {
             let folder = UIAlertAction(title: item.titleFolder, style: .default) { [weak self] _ in
+                self?.idFolder = item.idFolder
                 self?.moveToFolder(idNote: self?.idNote ?? "", idFolder: item.idFolder)
             }
             alertController.addAction(folder)
