@@ -88,10 +88,14 @@ class NoteContentViewController: UIViewController {
     }
     
     @available(iOS 14.0, *)
-    func setupRightBarButton() {
+    func setupRightBarButton(isCounting: Bool = false) {
         let rightBarButtonItem = UIBarButtonItem(title: "Done", style: .plain , target: self, action: #selector(doneAction))
         let setting = UIBarButtonItem(image: UIImage(named: "icon_setting"), style: .plain, target: self, action: #selector(openSetting))
-        self.navigationItem.rightBarButtonItems = [rightBarButtonItem, setting]
+        var timer = UIBarButtonItem(image: UIImage(named: "ic_time"), style: .plain, target: self, action: #selector(setTimer))
+        if isCounting {
+            timer = UIBarButtonItem(image: UIImage(named: "ic_time_2"), style: .plain, target: self, action: nil)
+        }
+        self.navigationItem.rightBarButtonItems = [rightBarButtonItem, setting, timer]
     }
     
     override func touchBackButton() {
@@ -102,6 +106,19 @@ class NoteContentViewController: UIViewController {
     @objc func doneAction() {
         saveData()
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    @objc func setTimer() {
+        let vc = SetTimerViewController.init(nibName: SetTimerViewController.className, bundle: nil)
+        vc.timeChoose = { [weak self] hour, min, sec in
+            if #available(iOS 14.0, *) {
+                self?.setupRightBarButton(isCounting: true)
+            } else {
+                // Fallback on earlier versions
+            }
+            print(hour, min, sec)
+        }
+        self.present(vc, animated: true, completion: nil)
     }
     
     @objc func openSetting() {

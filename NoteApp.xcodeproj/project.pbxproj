@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		218133CE0BAB129F8591D057 /* Pods_NoteApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82CAA844755A9849F41104EC /* Pods_NoteApp.framework */; };
+		36542436294F0981008E872D /* SetTimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36542434294F0981008E872D /* SetTimerViewController.swift */; };
+		36542437294F0981008E872D /* SetTimerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36542435294F0981008E872D /* SetTimerViewController.xib */; };
 		3679F037293B2699009A3BAD /* Crypto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3679F036293B2699009A3BAD /* Crypto.swift */; };
 		367E7F472937AC7D009960F0 /* SettingNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367E7F452937AC7D009960F0 /* SettingNoteViewController.swift */; };
 		367E7F482937AC7D009960F0 /* SettingNoteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 367E7F462937AC7D009960F0 /* SettingNoteViewController.xib */; };
@@ -49,6 +51,8 @@
 
 /* Begin PBXFileReference section */
 		052467612AB716AA8E99F55F /* Pods-NoteApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoteApp.release.xcconfig"; path = "Target Support Files/Pods-NoteApp/Pods-NoteApp.release.xcconfig"; sourceTree = "<group>"; };
+		36542434294F0981008E872D /* SetTimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetTimerViewController.swift; sourceTree = "<group>"; };
+		36542435294F0981008E872D /* SetTimerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SetTimerViewController.xib; sourceTree = "<group>"; };
 		3679F036293B2699009A3BAD /* Crypto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Crypto.swift; sourceTree = "<group>"; };
 		367E7F452937AC7D009960F0 /* SettingNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingNoteViewController.swift; sourceTree = "<group>"; };
 		367E7F462937AC7D009960F0 /* SettingNoteViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingNoteViewController.xib; sourceTree = "<group>"; };
@@ -106,6 +110,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		36542433294F096A008E872D /* Timer */ = {
+			isa = PBXGroup;
+			children = (
+				36542434294F0981008E872D /* SetTimerViewController.swift */,
+				36542435294F0981008E872D /* SetTimerViewController.xib */,
+			);
+			path = Timer;
+			sourceTree = "<group>";
+		};
 		367E7F442937AC63009960F0 /* Setting */ = {
 			isa = PBXGroup;
 			children = (
@@ -290,6 +303,7 @@
 		D8F6C6CC292B638200EF1A5F /* NoteContent */ = {
 			isa = PBXGroup;
 			children = (
+				36542433294F096A008E872D /* Timer */,
 				367E7F442937AC63009960F0 /* Setting */,
 				D8B2CB5E2930A87F0008F5C4 /* LockNote */,
 				D8F6C6CD292B639500EF1A5F /* NoteContentViewController.swift */,
@@ -378,6 +392,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D8B2CB622930A8970008F5C4 /* LockNoteViewController.xib in Resources */,
+				36542437294F0981008E872D /* SetTimerViewController.xib in Resources */,
 				D80FA51A2924902B00D0B9ED /* TitleTableViewCell.xib in Resources */,
 				D8E464B52934679500275DF2 /* SearchViewController.xib in Resources */,
 				D80FA522292490F600D0B9ED /* FolderTableViewCell.xib in Resources */,
@@ -442,6 +457,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				36542436294F0981008E872D /* SetTimerViewController.swift in Sources */,
 				3679F037293B2699009A3BAD /* Crypto.swift in Sources */,
 				D80FA5322924D10400D0B9ED /* Other+.swift in Sources */,
 				D80FA521292490F600D0B9ED /* FolderTableViewCell.swift in Sources */,

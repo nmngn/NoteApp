@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SetTimerViewController" customModule="NoteApp" customModuleProvider="target">
+            <connections>
+                <outlet property="timerPicker" destination="JQq-Pa-ILS" id="aSR-4g-jaA"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mqt-P8-U79">
+                    <rect key="frame" x="0.0" y="582" width="414" height="280"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2wR-uj-xbL">
+                            <rect key="frame" x="350" y="0.0" width="64" height="48"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="64" id="3gZ-GT-DVs"/>
+                                <constraint firstAttribute="height" constant="48" id="IC1-m1-Qiu"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                            <state key="normal" title="Chọn"/>
+                            <connections>
+                                <action selector="setAction:" destination="-1" eventType="touchUpInside" id="9Pi-7q-jSf"/>
+                            </connections>
+                        </button>
+                        <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JQq-Pa-ILS">
+                            <rect key="frame" x="0.0" y="48" width="414" height="232"/>
+                        </pickerView>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="JQq-Pa-ILS" secondAttribute="trailing" id="DKu-gH-vhE"/>
+                        <constraint firstItem="JQq-Pa-ILS" firstAttribute="top" secondItem="2wR-uj-xbL" secondAttribute="bottom" id="YwB-pM-a61"/>
+                        <constraint firstAttribute="bottom" secondItem="JQq-Pa-ILS" secondAttribute="bottom" id="gf7-CW-nHs"/>
+                        <constraint firstItem="JQq-Pa-ILS" firstAttribute="leading" secondItem="Mqt-P8-U79" secondAttribute="leading" id="iox-Wv-Bv9"/>
+                        <constraint firstAttribute="trailing" secondItem="2wR-uj-xbL" secondAttribute="trailing" id="lpy-bQ-efk"/>
+                        <constraint firstAttribute="height" constant="280" id="tIj-qt-4Hq"/>
+                        <constraint firstItem="2wR-uj-xbL" firstAttribute="top" secondItem="Mqt-P8-U79" secondAttribute="top" id="wca-03-kea"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="8"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="Mqt-P8-U79" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="BZi-vF-RNh"/>
+                <constraint firstItem="Mqt-P8-U79" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="efz-bz-oAP"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="Mqt-P8-U79" secondAttribute="bottom" id="gpo-Dl-pFM"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="137.68115942028987" y="76.339285714285708"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
