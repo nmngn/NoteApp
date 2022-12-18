@@ -620,6 +620,9 @@
 				DEVELOPMENT_TEAM = 3JQK33626M;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NoteApp/Info.plist;
+				INFOPLIST_KEY_NSAppleMusicUsageDescription = "Please allow photo to use this app";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Please allow camera to use this app";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "Please allow FaceID or TouchID to unlock note quickly";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -655,6 +658,9 @@
 				DEVELOPMENT_TEAM = 3JQK33626M;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NoteApp/Info.plist;
+				INFOPLIST_KEY_NSAppleMusicUsageDescription = "Please allow photo to use this app";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Please allow camera to use this app";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "Please allow FaceID or TouchID to unlock note quickly";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

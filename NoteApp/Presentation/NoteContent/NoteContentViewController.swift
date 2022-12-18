@@ -45,6 +45,11 @@ class NoteContentViewController: UIViewController {
         self.navigationController?.navigationBar.prefersLargeTitles = false
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.navigationController?.viewControllers.removeAll(where: {$0 is LockNoteViewController})
+    }
+    
     func configComponent() {
         timeLabel.text = getCurrentDate()
         titleTextView.delegate = self
@@ -91,13 +96,11 @@ class NoteContentViewController: UIViewController {
     
     override func touchBackButton() {
         saveData()
-        self.navigationController?.viewControllers.removeAll(where: {$0 is LockNoteViewController})
         self.navigationController?.popViewController(animated: true)
     }
     
     @objc func doneAction() {
         saveData()
-        self.navigationController?.viewControllers.removeAll(where: {$0 is LockNoteViewController})
         self.navigationController?.popViewController(animated: true)
     }
     
@@ -237,6 +240,7 @@ extension NoteContentViewController: ManipulationDelegate {
                     self?.lockNote(id: self?.idNote ?? "", isLock: true)
                     Session.shared.reloadInList = true
                     self?.updateStatus(action: "lock")
+                    self?.navigationController?.popViewController(animated: true)
                 })
             } else {
                 self.lockNote(id: self.idNote, isLock: !self.isLock)

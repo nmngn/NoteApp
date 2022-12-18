@@ -7,6 +7,7 @@
 
 import UIKit
 import CoreData
+import LocalAuthentication
 
 extension UIViewController {
     
@@ -63,6 +64,29 @@ extension UIViewController {
     
     @objc func touchBackButton() {
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    func getBiometric(completion: (() -> ())?) {
+        let context = LAContext()
+        var authError: NSError?
+
+        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &authError) {
+            context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics,
+                                   localizedReason: "Use FaceID or TouchID to open this note") { success, error in
+                DispatchQueue.main.async {
+                    switch success {
+                    case true:
+                        if context.evaluatedPolicyDomainState == nil {
+                            completion?()
+                        } else {
+                            completion?()
+                        }
+                    case false:
+                        break
+                    }
+                }
+            }
+        }
     }
     
     // MARK: - CoreData

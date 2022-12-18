@@ -20,26 +20,9 @@ class LockNoteViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-//        let context = LAContext()
-//        var error: NSError?
-//
-//        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
-//            let reason = "Use Face ID or Touch ID to open this note"
-//
-//            context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) {
-//                [weak self] success, authenticationError in
-//
-//                DispatchQueue.main.async {
-//                    if success {
-//                        self?.unlockNote()
-//                    } else {
-// 
-//                    }
-//                }
-//            }
-//        } else {
-//            
-//        }
+        getBiometric { [weak self] in
+            self?.unlockNote()
+        }
     }
     
     func getDataOfNote(id: String) {

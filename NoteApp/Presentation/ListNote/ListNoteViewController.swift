@@ -253,9 +253,9 @@ extension ListNoteViewController: UITableViewDelegate, UITableViewDataSource {
             if Session.shared.passwordNote.isEmpty {
                 self?.createPassword(actionAfterSetPassword: { [weak self] in
                     self?.lockNote(id: self?.model[indexPath.row].idNote ?? "", isLock: true)
+                    self?.getDataOfNote(id: self?.model[indexPath.row].idNote ?? "", indexPath: indexPath)
+                    self?.tableView.reloadRows(at: [IndexPath(row: indexPath.row, section: 0)], with: .automatic)
                 })
-                self?.getDataOfNote(id: self?.model[indexPath.row].idNote ?? "", indexPath: indexPath)
-                self?.tableView.reloadRows(at: [IndexPath(row: indexPath.row, section: 0)], with: .automatic)
             } else {
                 if lockText == "Lock" {
                     self?.lockNote(id: self?.model[indexPath.row].idNote ?? "", isLock: true)
