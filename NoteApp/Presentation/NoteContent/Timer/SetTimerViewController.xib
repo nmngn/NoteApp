@@ -38,10 +38,18 @@
                         <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JQq-Pa-ILS">
                             <rect key="frame" x="0.0" y="48" width="414" height="232"/>
                         </pickerView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Set time to lock" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4F9-xg-Rtj">
+                            <rect key="frame" x="148" y="14" width="118" height="20"/>
+                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="JQq-Pa-ILS" secondAttribute="trailing" id="DKu-gH-vhE"/>
+                        <constraint firstItem="4F9-xg-Rtj" firstAttribute="centerX" secondItem="Mqt-P8-U79" secondAttribute="centerX" id="GwF-yg-5pX"/>
+                        <constraint firstItem="4F9-xg-Rtj" firstAttribute="centerY" secondItem="2wR-uj-xbL" secondAttribute="centerY" id="Oze-ai-tcA"/>
                         <constraint firstItem="JQq-Pa-ILS" firstAttribute="top" secondItem="2wR-uj-xbL" secondAttribute="bottom" id="YwB-pM-a61"/>
                         <constraint firstAttribute="bottom" secondItem="JQq-Pa-ILS" secondAttribute="bottom" id="gf7-CW-nHs"/>
                         <constraint firstItem="JQq-Pa-ILS" firstAttribute="leading" secondItem="Mqt-P8-U79" secondAttribute="leading" id="iox-Wv-Bv9"/>

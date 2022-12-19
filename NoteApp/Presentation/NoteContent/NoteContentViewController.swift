@@ -113,6 +113,7 @@ class NoteContentViewController: UIViewController {
         vc.timeChoose = { [weak self] hour, min, sec in
             self?.countdownView.isHidden = false
             self?.countdownLabel.text = "\(hour)H \(min)M \(sec)S"
+            self?.countdownTime(hour: hour, min: min, sec: sec)
             if #available(iOS 14.0, *) {
                 self?.setupRightBarButton()
             } else {
@@ -213,6 +214,83 @@ class NoteContentViewController: UIViewController {
             print("Could not fetch. \(error), \(error.userInfo)")
         }
     }
+    
+    func countdownTime(hour: Int, min: Int, sec: Int) {
+        var hour = hour
+        var min = min
+        var sec = sec
+        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] timer in
+            if hour == 0 {
+                if min == 0 {
+                    if sec == 0 {
+                        timer.invalidate()
+                    } else {
+                        repeat {
+                            sec -= 1
+                        } while sec < 0
+                    }
+                    // done sec
+                } else {
+                    if sec == 0 {
+                        repeat {
+                            min -= 1
+                            sec = 60
+                            repeat {
+                                sec -= 1
+                            } while sec < 0
+                        } while min < 0
+                        print(hour, min, sec)
+                    } else {
+                        repeat {
+                            sec -= 1
+                        } while sec < 0
+                        repeat {
+                            min -= 1
+                            sec = 60
+                            repeat {
+                                sec -= 1
+                            } while sec < 0
+                        } while min < 0
+                        print(hour, min, sec)
+                    }
+                }
+            } else {
+                if min == 0 {
+                    if sec == 0 {
+                        hour -= 1
+                        min = 60
+                        sec = 60
+                        repeat {
+                            sec -= 1
+                        } while sec == 0
+                        repeat {
+                            min -= 1
+                            sec = 60
+                            repeat {
+                                sec -= 1
+                            } while sec == 0
+                        } while min == 0
+                        print(hour, min, sec)
+                    } else {
+                        repeat {
+                            sec -= 1
+                        } while sec == 0
+                        repeat {
+                            min -= 1
+                            sec = 60
+                            repeat {
+                                sec -= 1
+                            } while sec == 0
+                        } while min == 0
+                        print(hour, min, sec)
+                    }
+                } else {
+                    
+                }
+            }
+        }
+    }
+    
     @IBAction func openPhoto(_ sender: UIButton) {
         openLibararies()
     }
@@ -225,7 +303,6 @@ class NoteContentViewController: UIViewController {
             // Fallback on earlier versions
         }
     }
-    
 }
 
 extension NoteContentViewController: UITextViewDelegate {
