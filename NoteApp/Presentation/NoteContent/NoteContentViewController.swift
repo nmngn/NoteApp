@@ -212,6 +212,9 @@ class NoteContentViewController: UIViewController {
             print("Could not fetch. \(error), \(error.userInfo)")
         }
     }
+    @IBAction func openPhoto(_ sender: UIButton) {
+        openLibararies()
+    }
 }
 
 extension NoteContentViewController: UITextViewDelegate {
@@ -345,7 +348,7 @@ extension NoteContentViewController: UIImagePickerControllerDelegate, UINavigati
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            let attributedString = NSMutableAttributedString(string: contentTextView.text)
+            let attributedString = NSMutableAttributedString()
             let textAttachment = NSTextAttachment()
             textAttachment.image = image
 
@@ -357,7 +360,7 @@ extension NoteContentViewController: UIImagePickerControllerDelegate, UINavigati
             
             let attrStringWithImage = NSAttributedString(attachment: textAttachment)
             attributedString.append(attrStringWithImage)
-            contentTextView.attributedText = attributedString;
+            contentTextView.attributedText = attributedString
         }
         picker.dismiss(animated: true, completion: nil)
     }
