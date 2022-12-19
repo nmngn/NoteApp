@@ -13,6 +13,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NoteContentViewController" customModule="NoteApp" customModuleProvider="target">
             <connections>
                 <outlet property="contentTextView" destination="I8u-CF-AZU" id="khG-eJ-XgM"/>
+                <outlet property="countdownLabel" destination="r8W-mf-K3x" id="c6L-1I-X3J"/>
+                <outlet property="countdownView" destination="ZVM-mL-R2y" id="bni-EJ-AGm"/>
                 <outlet property="scrollView" destination="noC-TF-64S" id="S4p-0h-Gc0"/>
                 <outlet property="scrollViewHeightConstraint" destination="hbz-jN-8k7" id="JG7-mx-5Bf"/>
                 <outlet property="timeLabel" destination="ePo-T0-QAF" id="Gcv-1b-zDs"/>
@@ -127,6 +129,9 @@
                                             </hierarchicalColors>
                                         </imageReference>
                                     </state>
+                                    <connections>
+                                        <action selector="stopCounting:" destination="-1" eventType="touchUpInside" id="ipc-HQ-t31"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" red="0.74529135347616793" green="0.43634503115176343" blue="0.0054282161967083202" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

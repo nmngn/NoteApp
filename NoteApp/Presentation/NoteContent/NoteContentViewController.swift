@@ -16,7 +16,9 @@ class NoteContentViewController: UIViewController {
     @IBOutlet weak var titleTextView: UITextView!
     @IBOutlet weak var contentTextView: UITextView!
     @IBOutlet weak var scrollView: UIScrollView!
-
+    @IBOutlet weak var countdownView: UIView!
+    @IBOutlet weak var countdownLabel: UILabel!
+    
     var dataContent: ListNoteModel?
     
     var idNote = ""
@@ -31,13 +33,14 @@ class NoteContentViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationButton()
+        configComponent()
+        setupData()
+        countdownView.isHidden = true
         if #available(iOS 14.0, *) {
             setupRightBarButton()
         } else {
             // Fallback on earlier versions
         }
-        configComponent()
-        setupData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -88,13 +91,10 @@ class NoteContentViewController: UIViewController {
     }
     
     @available(iOS 14.0, *)
-    func setupRightBarButton(isCounting: Bool = false) {
+    func setupRightBarButton() {
         let rightBarButtonItem = UIBarButtonItem(title: "Done", style: .plain , target: self, action: #selector(doneAction))
         let setting = UIBarButtonItem(image: UIImage(named: "icon_setting"), style: .plain, target: self, action: #selector(openSetting))
-        var timer = UIBarButtonItem(image: UIImage(named: "ic_time"), style: .plain, target: self, action: #selector(setTimer))
-        if isCounting {
-            timer = UIBarButtonItem(image: UIImage(named: "ic_time_2"), style: .plain, target: self, action: nil)
-        }
+        let timer = UIBarButtonItem(image: self.countdownView.isHidden ? UIImage(named: "ic_time") : UIImage(named: "ic_time_2"), style: .plain, target: self, action: self.countdownView.isHidden ? #selector(setTimer) : nil)
         self.navigationItem.rightBarButtonItems = [rightBarButtonItem, setting, timer]
     }
     
@@ -111,12 +111,13 @@ class NoteContentViewController: UIViewController {
     @objc func setTimer() {
         let vc = SetTimerViewController.init(nibName: SetTimerViewController.className, bundle: nil)
         vc.timeChoose = { [weak self] hour, min, sec in
+            self?.countdownView.isHidden = false
+            self?.countdownLabel.text = "\(hour)H \(min)M \(sec)S"
             if #available(iOS 14.0, *) {
-                self?.setupRightBarButton(isCounting: true)
+                self?.setupRightBarButton()
             } else {
                 // Fallback on earlier versions
             }
-            print(hour, min, sec)
         }
         self.present(vc, animated: true, completion: nil)
     }
@@ -215,6 +216,16 @@ class NoteContentViewController: UIViewController {
     @IBAction func openPhoto(_ sender: UIButton) {
         openLibararies()
     }
+    
+    @IBAction func stopCounting(_ sender: UIButton) {
+        countdownView.isHidden = true
+        if #available(iOS 14.0, *) {
+            self.setupRightBarButton()
+        } else {
+            // Fallback on earlier versions
+        }
+    }
+    
 }
 
 extension NoteContentViewController: UITextViewDelegate {
