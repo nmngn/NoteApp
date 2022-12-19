@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -79,26 +80,114 @@
                         <constraint firstItem="ldj-nq-r4v" firstAttribute="leading" secondItem="noC-TF-64S" secondAttribute="leading" id="gTm-k6-ttG"/>
                     </constraints>
                 </scrollView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DUN-g8-ZI1">
+                    <rect key="frame" x="0.0" y="806" width="414" height="56"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hey-UG-U9t">
+                            <rect key="frame" x="16" y="8" width="40" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="40" id="1zv-cd-i6b"/>
+                                <constraint firstAttribute="height" constant="40" id="MtU-Fn-Ngz"/>
+                            </constraints>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            <state key="normal">
+                                <imageReference key="image" image="camera.on.rectangle" catalog="system" symbolScale="large" renderingMode="hierarchical-single">
+                                    <hierarchicalColors>
+                                        <color systemColor="systemOrangeColor"/>
+                                        <color systemColor="secondaryLabelColor"/>
+                                        <color systemColor="tertiaryLabelColor"/>
+                                    </hierarchicalColors>
+                                </imageReference>
+                            </state>
+                        </button>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZVM-mL-R2y">
+                            <rect key="frame" x="242" y="8" width="160" height="40"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r8W-mf-K3x">
+                                    <rect key="frame" x="8" y="11" width="104" height="18"/>
+                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X8s-kw-zKY">
+                                    <rect key="frame" x="120" y="0.0" width="40" height="40"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="40" id="fQf-oW-gbk"/>
+                                    </constraints>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal">
+                                        <imageReference key="image" image="xmark" catalog="system" renderingMode="hierarchical-single">
+                                            <hierarchicalColors>
+                                                <color systemColor="labelColor"/>
+                                                <color systemColor="secondaryLabelColor"/>
+                                                <color systemColor="tertiaryLabelColor"/>
+                                            </hierarchicalColors>
+                                        </imageReference>
+                                    </state>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" red="0.74529135347616793" green="0.43634503115176343" blue="0.0054282161967083202" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstItem="r8W-mf-K3x" firstAttribute="leading" secondItem="ZVM-mL-R2y" secondAttribute="leading" constant="8" id="1aj-7i-aur"/>
+                                <constraint firstAttribute="width" constant="160" id="2B0-ob-lQO"/>
+                                <constraint firstItem="r8W-mf-K3x" firstAttribute="centerY" secondItem="ZVM-mL-R2y" secondAttribute="centerY" id="AXZ-CI-K3H"/>
+                                <constraint firstItem="X8s-kw-zKY" firstAttribute="top" secondItem="ZVM-mL-R2y" secondAttribute="top" id="I0K-qe-gd9"/>
+                                <constraint firstAttribute="bottom" secondItem="X8s-kw-zKY" secondAttribute="bottom" id="c1n-Gr-NCf"/>
+                                <constraint firstItem="X8s-kw-zKY" firstAttribute="leading" secondItem="r8W-mf-K3x" secondAttribute="trailing" constant="8" id="mEE-6E-mES"/>
+                                <constraint firstAttribute="trailing" secondItem="X8s-kw-zKY" secondAttribute="trailing" id="rOc-Cq-1SN"/>
+                            </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <real key="value" value="16"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="56" id="5o9-2l-TXY"/>
+                        <constraint firstItem="ZVM-mL-R2y" firstAttribute="top" secondItem="DUN-g8-ZI1" secondAttribute="top" constant="8" id="C7H-cA-Z3C"/>
+                        <constraint firstItem="Hey-UG-U9t" firstAttribute="leading" secondItem="DUN-g8-ZI1" secondAttribute="leading" constant="16" id="JOF-lc-SlH"/>
+                        <constraint firstItem="Hey-UG-U9t" firstAttribute="centerY" secondItem="DUN-g8-ZI1" secondAttribute="centerY" id="XNO-ec-jdb"/>
+                        <constraint firstItem="ZVM-mL-R2y" firstAttribute="centerY" secondItem="DUN-g8-ZI1" secondAttribute="centerY" id="Xdw-Pw-pru"/>
+                        <constraint firstAttribute="trailing" secondItem="ZVM-mL-R2y" secondAttribute="trailing" constant="12" id="s8M-MG-0xV"/>
+                        <constraint firstAttribute="bottom" secondItem="ZVM-mL-R2y" secondAttribute="bottom" constant="8" id="ush-J3-AhN"/>
+                    </constraints>
+                </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="DUN-g8-ZI1" secondAttribute="trailing" id="8vQ-e2-ie5"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="noC-TF-64S" secondAttribute="bottom" id="9Qs-Fd-bB3"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="noC-TF-64S" secondAttribute="trailing" id="BLg-bV-4CI"/>
                 <constraint firstItem="noC-TF-64S" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="LeM-kh-3p9"/>
+                <constraint firstItem="DUN-g8-ZI1" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Npk-n6-wFM"/>
                 <constraint firstItem="ldj-nq-r4v" firstAttribute="width" secondItem="noC-TF-64S" secondAttribute="width" id="OBh-nb-1ek"/>
                 <constraint firstItem="noC-TF-64S" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="U7R-aS-oBh"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="DUN-g8-ZI1" secondAttribute="bottom" id="aG6-uA-Air"/>
                 <constraint firstItem="ldj-nq-r4v" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" id="hbz-jN-8k7"/>
             </constraints>
             <point key="canvasLocation" x="131.8840579710145" y="117.85714285714285"/>
         </view>
     </objects>
     <resources>
+        <image name="camera.on.rectangle" catalog="system" width="128" height="96"/>
+        <image name="xmark" catalog="system" width="128" height="113"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
+        <systemColor name="secondaryLabelColor">
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemOrangeColor">
+            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="tertiaryLabelColor">
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
