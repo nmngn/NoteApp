@@ -219,17 +219,19 @@ class NoteContentViewController: UIViewController {
         var hour = hour
         var min = min
         var sec = sec
-        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] timer in
+        Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true) { [weak self] timer in
             if hour == 0 {
                 if min == 0 {
                     if sec == 0 {
                         timer.invalidate()
+                        self?.lockNote()
+                        print("Terminated & Lock")
                     } else {
                         repeat {
                             sec -= 1
                         } while sec < 0
+                        print(hour, min, sec)
                     }
-                    // done sec
                 } else {
                     if sec == 0 {
                         repeat {
@@ -244,13 +246,6 @@ class NoteContentViewController: UIViewController {
                         repeat {
                             sec -= 1
                         } while sec < 0
-                        repeat {
-                            min -= 1
-                            sec = 60
-                            repeat {
-                                sec -= 1
-                            } while sec < 0
-                        } while min < 0
                         print(hour, min, sec)
                     }
                 }
@@ -262,30 +257,37 @@ class NoteContentViewController: UIViewController {
                         sec = 60
                         repeat {
                             sec -= 1
-                        } while sec == 0
+                        } while sec < 0
                         repeat {
                             min -= 1
                             sec = 60
                             repeat {
                                 sec -= 1
-                            } while sec == 0
-                        } while min == 0
+                            } while sec < 0
+                        } while min < 0
                         print(hour, min, sec)
                     } else {
                         repeat {
                             sec -= 1
-                        } while sec == 0
+                        } while sec < 0
+                        print(hour, min, sec)
+                    }
+                } else {
+                    if sec == 0 {
                         repeat {
                             min -= 1
                             sec = 60
                             repeat {
                                 sec -= 1
-                            } while sec == 0
-                        } while min == 0
+                            } while sec < 0
+                        } while min < 0
+                        print(hour, min, sec)
+                    } else {
+                        repeat {
+                            sec -= 1
+                        } while sec < 0
                         print(hour, min, sec)
                     }
-                } else {
-                    
                 }
             }
         }
