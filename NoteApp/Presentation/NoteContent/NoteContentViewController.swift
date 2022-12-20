@@ -112,8 +112,9 @@ class NoteContentViewController: UIViewController {
         let vc = SetTimerViewController.init(nibName: SetTimerViewController.className, bundle: nil)
         vc.timeChoose = { [weak self] hour, min, sec in
             self?.countdownView.isHidden = false
-            self?.countdownLabel.text = "\(hour)H \(min)M \(sec)S"
-            self?.countdownTime(hour: hour, min: min, sec: sec)
+            DispatchQueue.main.async {
+                self?.countdownTime(hour: hour, min: min, sec: sec)
+            }
             if #available(iOS 14.0, *) {
                 self?.setupRightBarButton()
             } else {
@@ -219,7 +220,7 @@ class NoteContentViewController: UIViewController {
         var hour = hour
         var min = min
         var sec = sec
-        Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true) { [weak self] timer in
+        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] timer in
             if hour == 0 {
                 if min == 0 {
                     if sec == 0 {
@@ -230,7 +231,10 @@ class NoteContentViewController: UIViewController {
                         repeat {
                             sec -= 1
                         } while sec < 0
-                        print(hour, min, sec)
+                        if sec == 10 {
+                            self?.view.makeToast("Notification: 10s to lock")
+                        }
+                        self?.countdownLabel.text = "\(hour)H \(min)M \(sec)S"
                     }
                 } else {
                     if sec == 0 {
@@ -241,12 +245,12 @@ class NoteContentViewController: UIViewController {
                                 sec -= 1
                             } while sec < 0
                         } while min < 0
-                        print(hour, min, sec)
+                        self?.countdownLabel.text = "\(hour)H \(min)M \(sec)S"
                     } else {
                         repeat {
                             sec -= 1
                         } while sec < 0
-                        print(hour, min, sec)
+                        self?.countdownLabel.text = "\(hour)H \(min)M \(sec)S"
                     }
                 }
             } else {
@@ -265,12 +269,12 @@ class NoteContentViewController: UIViewController {
                                 sec -= 1
                             } while sec < 0
                         } while min < 0
-                        print(hour, min, sec)
+                        self?.countdownLabel.text = "\(hour)H \(min)M \(sec)S"
                     } else {
                         repeat {
                             sec -= 1
                         } while sec < 0
-                        print(hour, min, sec)
+                        self?.countdownLabel.text = "\(hour)H \(min)M \(sec)S"
                     }
                 } else {
                     if sec == 0 {
@@ -281,12 +285,12 @@ class NoteContentViewController: UIViewController {
                                 sec -= 1
                             } while sec < 0
                         } while min < 0
-                        print(hour, min, sec)
+                        self?.countdownLabel.text = "\(hour)H \(min)M \(sec)S"
                     } else {
                         repeat {
                             sec -= 1
                         } while sec < 0
-                        print(hour, min, sec)
+                        self?.countdownLabel.text = "\(hour)H \(min)M \(sec)S"
                     }
                 }
             }
