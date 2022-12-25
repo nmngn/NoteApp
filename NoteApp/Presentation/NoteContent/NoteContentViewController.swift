@@ -354,7 +354,7 @@ extension NoteContentViewController: ManipulationDelegate {
                     self?.lockNote(id: self?.idNote ?? "", isLock: true)
                     Session.shared.reloadInList = true
                     self?.updateStatus(action: "lock")
-                    self?.navigationController?.popViewController(animated: true)
+                    self?.touchBackButton()
                 })
             } else {
                 self.lockNote(id: self.idNote, isLock: !self.isLock)
@@ -362,7 +362,7 @@ extension NoteContentViewController: ManipulationDelegate {
             Session.shared.reloadInList = true
         }
         updateStatus(action: "lock")
-        self.navigationController?.popViewController(animated: true)
+        self.touchBackButton()
     }
     
     func removeNote() {
