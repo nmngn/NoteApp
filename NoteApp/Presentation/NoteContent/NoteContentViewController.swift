@@ -30,9 +30,11 @@ class NoteContentViewController: UIViewController {
     var contentNote = ""
     var lineCount = 0
     var contentAttributedNote = NSAttributedString()
+    var isTimeCountdown = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        isTimeCountdown = false
         setupNavigationButton()
         configComponent()
         setupData()
@@ -63,6 +65,8 @@ class NoteContentViewController: UIViewController {
         contentTextView.delegate = self
         contentTextView.autocorrectionType = .no
         contentTextView.isEditable = false
+        contentTextView.layer.masksToBounds = false
+        contentTextView.alwaysBounceVertical = true
         
         scrollView.keyboardDismissMode = .onDrag
         
@@ -100,13 +104,17 @@ class NoteContentViewController: UIViewController {
     }
     
     override func touchBackButton() {
-        saveData()
-        self.navigationController?.popViewController(animated: true)
+        if !isTimeCountdown {
+            saveData()
+            self.navigationController?.popViewController(animated: true)
+        }
     }
     
     @objc func doneAction() {
-        saveData()
-        self.navigationController?.popViewController(animated: true)
+        if !isTimeCountdown {
+            saveData()
+            self.navigationController?.popViewController(animated: true)
+        }
     }
     
     @objc func setTimer() {
@@ -126,10 +134,12 @@ class NoteContentViewController: UIViewController {
     }
     
     @objc func openSetting() {
-        let vc = SettingNoteViewController.init(nibName: SettingNoteViewController.className, bundle: nil)
-        vc.delegate = self
-        vc.model = dataContent
-        self.present(vc, animated: true, completion: nil)
+        if !isTimeCountdown {
+            let vc = SettingNoteViewController.init(nibName: SettingNoteViewController.className, bundle: nil)
+            vc.delegate = self
+            vc.model = dataContent
+            self.present(vc, animated: true, completion: nil)
+        }
     }
     
     func saveData() {
@@ -218,6 +228,7 @@ class NoteContentViewController: UIViewController {
     }
     
     func countdownTime(hour: Int, min: Int, sec: Int) {
+        isTimeCountdown = true
         var hour = hour
         var min = min
         var sec = sec
@@ -226,6 +237,8 @@ class NoteContentViewController: UIViewController {
                 if min == 0 {
                     if sec == 0 {
                         timer.invalidate()
+                        self?.isTimeCountdown = false
+                        self?.stopCounting()
                         self?.lockNote()
                         print("Terminated & Lock")
                     } else {
@@ -302,10 +315,10 @@ class NoteContentViewController: UIViewController {
         openLibararies()
     }
     
-    @IBAction func stopCounting(_ sender: UIButton) {
+    func stopCounting() {
         countdownView.isHidden = true
         if #available(iOS 14.0, *) {
-            self.setupRightBarButton()
+            setupRightBarButton()
         } else {
             // Fallback on earlier versions
         }
