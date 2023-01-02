@@ -29,6 +29,7 @@ class NoteContentViewController: UIViewController {
     var titleNote = ""
     var contentNote = ""
     var lineCount = 0
+    var contentAttributedNote = NSAttributedString()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -441,20 +442,25 @@ extension NoteContentViewController: UIImagePickerControllerDelegate, UINavigati
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            let attributedString = NSMutableAttributedString()
-            let textAttachment = NSTextAttachment()
-            textAttachment.image = image
+        if let pickImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            //create and NSTextAttachment and add your image to it.
+            let attachment = NSTextAttachment()
+            attachment.image = pickImage
 
-            let oldWidth = textAttachment.image!.size.width;
+            //calculate new size.  (-20 because I want to have a litle space on the right of picture)
+            let newImageWidth = (contentTextView.bounds.size.width - 15 )
+            let scale = newImageWidth/pickImage.size.width
+            let newImageHeight = pickImage.size.height * scale - 20
 
-            let scaleFactor = oldWidth / (self.contentTextView.frame.size.width - 10);
-            guard let newImage = textAttachment.image?.cgImage else { return }
-            textAttachment.image = UIImage(cgImage: newImage, scale: scaleFactor, orientation: .up)
-            
-            let attrStringWithImage = NSAttributedString(attachment: textAttachment)
-            attributedString.append(attrStringWithImage)
-            contentTextView.attributedText = attributedString
+            //resize this
+            attachment.bounds = CGRect.init(x: 0, y: 0, width: newImageWidth, height: newImageHeight)
+
+            //put your NSTextAttachment into and attributedString
+            contentAttributedNote = NSAttributedString(attachment: attachment)
+
+            //add this attributed string to the current position.
+            contentTextView.textStorage.insert(contentAttributedNote, at: contentTextView.selectedRange.location)
+            contentTextView.selectedRange.location += 1
         }
         picker.dismiss(animated: true, completion: nil)
     }

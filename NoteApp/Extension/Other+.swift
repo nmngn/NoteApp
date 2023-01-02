@@ -111,10 +111,3 @@ extension UILabel {
         self.numberOfLines = 1
     }
 }
-
-extension UIImage {
-    func toPngString() -> String? {
-         let data = self.pngData()
-         return data?.base64EncodedString(options: .endLineWithLineFeed)
-     }
-}

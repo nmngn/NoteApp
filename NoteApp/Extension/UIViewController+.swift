@@ -89,6 +89,30 @@ extension UIViewController {
         }
     }
     
+    // MARK: - Data
+    func setAttributedToUserDefault(text: NSAttributedString, key: String) {
+        do {
+            let data = try text.data(from: NSRange(location: 0, length: text.length),
+                                          documentAttributes: [.documentType: NSAttributedString.DocumentType.rtfd])
+            UserDefaults.standard.set(data, forKey: key)
+        } catch {
+            print(error)
+        }
+    }
+    
+    func getUserDefaultToAttributed(key: String) -> NSAttributedString {
+        if let dataValue = UserDefaults.standard.value(forKey: key) as? Data {
+            do {
+                let attributed = try NSAttributedString(data: dataValue, options: [:],
+                                                        documentAttributes: nil)
+                return attributed
+            } catch {
+                return NSAttributedString()
+            }
+        }
+        return NSAttributedString()
+    }
+    
     // MARK: - CoreData
     func parseToHomeModel(item: NSManagedObject) -> HomeModel {
         let id = item.value(forKey: "idFolder") as? String ?? ""
